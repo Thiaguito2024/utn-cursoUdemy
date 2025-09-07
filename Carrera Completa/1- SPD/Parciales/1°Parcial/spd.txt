@@ -1,0 +1,172 @@
+1- que elemento caracteriza la primer gen de computadoras?
+
+ Las valvulas electronicas
+
+2- de donde se obtuvo la idea de las tarjetas perforadas
+
+De los telares de jacquard
+
+3- para que se usa el Coulomb
+
+para determinar una cantidad de electrones equivalente a 6,24×10 a la 18
+
+4- como se denomina al polo positivo
+
+ anodo
+
+5- de que polo a que polo circulan las cargas negativas
+
+del negativo al positivo
+
+6- de que factores depende la resistencia electrica
+
+grosor longitud, temperatura y conductividad
+
+7- unidad utilizada para representar la resistencia
+
+ ohm
+
+8- que es ampere
+
+la unidad de intensidad de corriente electrica
+
+9- que establece la ley de ohm
+
+////
+
+
+10- unidad que se utiliza para definir la diferencia de potencial electrico
+
+voltio
+
+11- a quien se le adjudica la arquitectura actual de las computadoras
+
+von neumman
+
+12- diferencias entre microprocesador y microcontrolador
+
+////
+
+
+13- que es un actuador en arduino (faltan ejemplos)
+
+es un dispositivo que nos permite interactuar con el exterior.
+
+14- que conversor viene integrado en arduino uno
+
+un analog digital converter (adc)
+
+15- resolucion de entrada analogica arduino uno
+
+analog 10 bits, valores entre 0 y 1023
+
+16- resolucion salida pwm arduino uno
+
+pwm 8 bits,entre 0 y 255
+
+
+----------------------------------------------------------
+
+1- Que elementos caracteriza  la cuarta generacion de computadoras?
+
+microporcesadores
+
+2- Que problemas presentaban las valvulas de vacio?
+
+levantaban mucha temp y se quemaban facil
+
+3- Cuantos electrones pasan por un conductor en 1 segundo si circula una corriente de 1 Ampere?
+
+6.23x10 a la 18
+
+4- Que es el catodo?
+
+polo negativo
+
+
+5- Que es 1kOhm? que componentes electronicos que usamos pueden tener este valor?
+
+es como se mide la corriente electrica
+
+6- de que factores depende la resistencia electrica?
+
+grosor, lngitud, conductividad y temp
+
+7- si enfrio un conductor aumenta o disminuye su resistencia
+
+disminuye
+
+8- Que es un baudio?
+
+es la unidad de velocidad de transmision de señales
+
+9 que relacion establece la ley de ohm?
+
+el flujo que circula por un circuito cerrado es directamente proporcional a la tencin aplicada e inversamente proporcional a la resistencia de la cargar conectada
+
+10- potenciometro, pulsador, led, display lcd. Indique cuales son sensores y cuales actuadores
+
+sensores: potenciometro
+actuadores: pulsador, led
+
+11- A quien se le adjudica la arquitectura actual de las pcs?
+
+Von neumman
+
+12- indique 3 dif entre microprocesador y microcontrolador
+
+velocidad de operacion
+
+microprocesador: rapido
+
+microcontrolador: lento 
+
+costos
+
+microprocesador: el costo es muy alto
+
+microcontrolador: es mucho menos 
+
+tiempo de desarrollo
+
+microprocesador: el tiempo de desarrollo de un MP es lento
+microcontrolador: es rapido
+
+13- que es un actuador en arduino?  indique 3.
+
+Un actuador es un dispositivo capaz de transformar energia en un proceso con el fin de un efecto en su entorno.
+
+14- Arduino tiene conversor Analag-Digital?
+
+si
+
+15- que lectura devuelve analogread de un pin, el cual recibe 5V
+
+0 a 1023
+
+16- que voltaje obtenemos en el pin 7 si ejecutamos esta instruccion analogWrite(7,255)?
+
+
+5v
+
+
+--------------------------------------------------------------------
+
+puede preguntar tambien:
+
+-nombre del polo positivo?
+
+Anodo
+
+-caracteristicas segunda gen
+
+La segunda, los transistores
+
+
+-caract tercera gen
+
+La tercera, circuitos integrados
+
+
+
+

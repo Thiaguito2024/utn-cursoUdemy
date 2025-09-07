@@ -1,0 +1,67 @@
+Crear usuario:
+sudo useradd -m -s /bin/bash -c "comentario" "Nombre usuario"
+
+Explicacion paso a paso:
+-m Para que cree el directorio home del usuario
+-s Para indicarle el interprete de comandos (Shell)
+-c Para agregar un comentario
+
+No importa el orden de como se agregan las cosas, siempre y cuando el nombre del nuevo usuario este al final.
+Asignar contraseña: 
+sudo passwd "nombre usuario"
+Para ver si el usuario tiene contraseña:
+sudo 
+Crea archivos:
+vim "nombre archivo" -> esc + w -> guarda y esc + q -> sale del archivo
+Otra opcion:
+"nombre del dato" > "nombre del archivo a crear"."extension del archivo"
+
+Significado de cada campo que devuelve la instruccion /etc/passwd:
+$1:Es el nombre del usuario 
+$2:La "x" indica la contraseña encriptada del usuario 
+$3:Numero de identificacion del usuario (UID)
+$4:Numero de identificacion del grupo (GID)
+$5:Comentarios o el nombre completo del usuario
+$6:Directorio de trabajo (home), donde se situa el usuario despues de iniciar sesion
+$7:Shell que va a utilizar el usuario de forma indirecta
+
+Significado de cada campo que devuelve la instruccion /etc/shadow:
+$1:Nombre de la cuenta del usuario.
+$2:Contraseña cifrada o encriptada, un '** indica cuenta de 'nologin'.
+$3:Días transcurridos desde el 1/ene/1970 hasta la fecha en que la contraseña fue cambiada por última vez.
+$4:Número de días que deben transcurrir hasta que la contraseña se pueda volver a cambiar.
+$5:Número de días tras los cuales hay que cambiar la contraseña. (-1 significa nunca).
+A partir de este dato se obtiene la fecha de expiración de la contraseña.
+$6:Número de días antes de la expiración de la contraseña en que se le avisará al usuario al inicio 
+de la sesión.
+$7:Días después de la expiración en que la contraseña se inhabilitara, si es que no se cambio.
+$8:Fecha de caducidad de la cuenta. Se expresa en días transcurridos desde el 1/Enero/1970 (epoch).
+
+Crear grupos secudarios: 
+sudo groupadd -g g1 "prueba" 
+y para asignarlos a un usuario: 
+sudo usermod -aG G1 thiago
+y para ver donde el id:
+sudo cat /etc/group |grep g1 |awk -F ':' '{print "GID: " $3}'
+
+
+Mostrar nombre de usuarios:
+cat /etc/passwd |awk -F ':' '{print "USER NAME:" $1}'
+$ = es la posicion de lo que va a listar (shift + numero 4)
+awk -> manipula archivos
+cat -> muestra/lee lo que hay en archivos
+
+Con el simbolo mayor > puedo guardar datos en un archivo.
+Simbolo mayor doble >> añade otro dato al mismo archivo sin pisar el que ya hay guardado.
+
+find * -> busca archivos y directorios
+
+|wc -l -> cuenta cantidad de archivos 
+
+grep -> busca palabras en archivos o directorios 
+
+xargs -> este comando funciona como puente entre dos comandos, tomando la salida del primero 
+como la entrada del segundo
+
+Permisos de los usuarios:
+chmod 1

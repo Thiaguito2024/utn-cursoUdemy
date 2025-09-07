@@ -1,0 +1,98 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include "input.h"
+#include "functions.h"
+
+void open_x_file(FILE*, char*);
+
+int main(void)
+{
+    FILE *Fpointer;
+    char text[] = "this text have 28 characters";
+    char text_base[200];
+    int text_lengh, written_lengh, loaded_lengh;
+    int cant;
+
+/*    if((Fpointer = fopen("Practice.txt", "r")) == NULL)
+    {
+        printf("couldn't open file in Read mode \n");
+        system("pause");
+
+        if((Fpointer = fopen("Practice.txt", "w")) == NULL)
+        {
+            printf("couldn't open file in Write mode \n");
+            system("pause");
+        }
+        else
+        {
+            printf("File was opened in Write mode \n");
+        }
+    }
+    else
+    {
+        printf("File was opened in Read Mode \n");
+    }
+
+    if((Fpointer = fopen("Practice.txt", "w")) == NULL)
+    {
+        printf("couldn't open file in Write mode \n");
+        system("pause");
+    }
+    else
+    {
+        printf("File was opened in Write mode \n");
+    }
+
+
+
+    text_lengh = strlen(text);
+
+    written_lengh = fwrite( text, sizeof (char), text_lengh, Fpointer);
+
+    if(written_lengh < text_lengh)
+    {
+        printf("File was not written entirely \n");
+        system("pause");
+    }
+    if(written_lengh = text_lengh)
+    {
+        printf("File was written entirely \n");
+        system("pause");
+    }
+
+    printf("There was %d characters written", text_lengh);
+
+    fclose(Fpointer);
+    printf("file was closed");
+    system("pause");
+
+*/
+
+    Fpointer = fopen("Practice.txt", "r");
+    if((Fpointer == NULL))
+    {
+        printf("couldn't open file in Read mode \n");
+        system("pause");
+    }
+    else
+    {
+        printf("\n File was opened in Read Mode \n");
+        system("pause");
+    }
+
+    fseek(Fpointer, 0L, SEEK_END);
+    int lengh_of_file = ftell(Fpointer);
+
+    fseek(Fpointer, 0L, SEEK_SET);
+
+    while(!feof(Fpointer)){
+        fread(text_base, sizeof(char), lengh_of_file, Fpointer);
+    }
+
+    printf(text_base);
+
+    fclose(Fpointer);
+    return 0;
+}

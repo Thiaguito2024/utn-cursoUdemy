@@ -1,0 +1,218 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include "input.h"
+#include "functions.h"
+
+
+int main(void)
+{
+    /*
+
+    struct_human* human;
+    struct_human* human2;
+
+    FILE *file_pointer;
+
+    int cant;
+
+    human = new_human();
+    human2 = new_human();
+
+    printf("--Name: %s\n--Last name: %s\n--ID: %d\n--Age: %d\n", human->name, human->last_name, human->ID, human->age);
+    system("pause");
+
+    printf("Now we will change the info of this human.\n");
+
+    printf("Type new name: ");
+    gets(human->name);
+
+    printf("Type new last name: ");
+    gets(human->last_name);
+
+    printf("Type new ID: ");
+    scanf("%d", &human->ID);
+
+    printf("Type new Age: ");
+    scanf("%d", &human->age);
+
+    system("cls");
+    printf("This is the new info: \n");
+    printf("--Name: %s\n--Last name: %s\n--ID: %d\n--Age: %d\n", human->name, human->last_name, human->ID, human->age);
+    system("pause");
+
+
+    printf("Now we will write or read the binary file\n");
+    system("pause");
+
+    file_pointer = fopen("Binary File Info.bin", "rb");
+    if(file_pointer == NULL)
+    {
+        printf("Couldn't open binary file in read mode. It will be written.\n");
+        system("pause");
+
+        file_pointer = fopen("Binary File Info.bin", "wb");
+        if (file_pointer == NULL)
+        {
+            printf("Couldn't open binary file in write mode.\n");
+            system("pause");
+        }
+        else
+        {
+            printf("Binary file was opened in write mode\n");
+            system("pause");
+
+            printf("Now we will write the info of Human into the file\n");
+            system("pause");
+
+            cant = fwrite(human, sizeof(struct_human), 1, file_pointer);
+            if(cant != 1)
+            {
+                printf("File was not written entirely\n");
+                system("pause");
+            }
+            else
+            {
+                printf("File was written entirely\n");
+                system("pause");
+            }
+        }
+    }
+    else
+    {
+        printf("Binary file was opened in read mode\n");
+        system("pause");
+
+        printf("Now we will read the info of Human, wrote in the file, into Human2\n");
+        system("pause");
+
+        cant = fread(human2, sizeof(struct_human), 1, file_pointer);
+        if(cant != 1)
+        {
+            printf("File was not readed entirely\n");
+            system("pause");
+        }
+        else
+        {
+            printf("File was readed entirely\n");
+            system("pause");
+        }
+
+        printf("This is loaded info: \n");
+        printf("--Name: %s\n--Last name: %s\n--ID: %d\n--Age: %d\n", human2->name, human2->last_name, human2->ID, human2->age);
+        system("pause");
+
+    }
+
+    if(fclose(file_pointer))
+        printf("file was closed\n");
+
+
+    */
+
+
+    struct_human* human_pointer;
+    struct_human* human_pointer_aux;
+    int human_quant = 1;
+    int continue_ = 1;
+
+    human_pointer = (struct_human*) malloc(sizeof(struct_human)*human_quant);
+    if(human_pointer==NULL)
+    {
+        printf("Could not allocate memory\n\n");
+        return 1;
+    }
+
+    while(1)
+    {
+        system("cls");
+        printf("\n Insert name: ");
+        gets((human_pointer+human_quant-1)->name);
+
+        printf("\n Insert last name: ");
+        gets((human_pointer+human_quant-1)->last_name);
+
+        printf("\n Insert age: ");
+        scanf("%d", &(human_pointer+human_quant-1)->age);
+
+        (human_pointer+human_quant-1)->ID = human_quant;
+
+        printf("\n Imput '1' to continue: ");
+        scanf("%d", &continue_);
+        fflush(stdin);
+
+        if (continue_ == 1)
+        {
+            human_quant++;
+
+            human_pointer_aux = (struct_human*) realloc(human_pointer, sizeof(struct_human)*human_quant);
+            if(human_pointer_aux==NULL)
+            {
+                printf("\n Could not reallocate memory");
+                break;
+            }
+            else
+            {
+                human_pointer = human_pointer_aux;
+            }
+        }
+        else
+        {
+            break;
+        }//CONTINUE END
+
+    }//WHILE END
+
+    system("cls");
+    printf("LOADED INFO------------------------------------\n");
+    for (int i =0; i<human_quant; i++)
+    {
+        printf("--Name: %s\n--Last name: %s\n--ID: %d\n--Age: %d\n\n", (human_pointer+i)->name, (human_pointer+i)->last_name, (human_pointer+i)->ID, (human_pointer+i)->age);
+    }
+
+    //------------MEMORY FREE ZONE--------------//
+    free(human_pointer);
+
+
+    return 0;
+}//PROGRAM END
+
+
+
+
+struct_human* new_human(void)
+{
+    struct_human* new_human_pointer;
+
+    new_human_pointer = (struct_human*) malloc( sizeof(struct_human));
+    if(new_human_pointer == NULL)
+    {
+        printf("Couln't allocate memory.");
+        return -1;
+    }
+    else
+    {
+        printf("Memory allocated successfully!\n");
+        system("pause");
+
+        strcpy(new_human_pointer->name, "-");
+        strcpy(new_human_pointer->last_name, "-");
+        new_human_pointer->ID=0;
+        new_human_pointer->age=0;
+
+        return new_human_pointer;
+    }
+}
+
+---------------------------------------------------
+
+typedef struct{
+    char name[50];
+    char last_name[50];
+    int age;
+    int ID;
+}struct_human;
+
+struct_human* new_human();
+

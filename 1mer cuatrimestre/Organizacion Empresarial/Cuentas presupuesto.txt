@@ -1,0 +1,32 @@
+Estado De Resultados: 
+Ventas -> Se suma el dinero que ganamos con las ventas
+Costo De Ventas -> Se multiplica lo que haya en ventas por el costo de ventas(%)
+Utilidad Bruta -> Se multiplica lo que haya en ventas por la ganancia que nos queda(%)
+Gastos operativos -> Son las amortizaciones, se multiplica lo que haya en el balance general proyectado anterior 
+por 0.03333333
+Gastos Admin -> Dato de la consigna
+Gastos de Comercializacion -> Se multiplica lo que haya en ventas por lo que diga la consigna que
+es ese gasto(%)
+Gastos Financieros -> Dato de la consigna
+Utilidad Operativa -> Utilidad Bruta menos gs operativos, gs admin, gs de comercializacion y gs 
+financieros
+Ingreso Extraordinarios -> Es dinero que ingresa por una actividad extra a la empresa(plazo fijo, acciones, etc)
+Egreso Extraordinarios -> Es dinero que egresa de la empresa por un siniestro, robo, etc.
+Resultado antes Impuestos -> Utildad Bruta + Ingreso Extraordinarios - Egreso Extraordinarios
+Impuesto a las ganancias -> Resultado antes Impuestos * porcentaje de impuesto a las ganancias
+Resultado ejercicio -> Resultado antes Impuestos - Impuesto a las ganancias
+
+Balance General Proyectado:
+Activo Corriente;
+Caja y bancos -> Saldo final del presupuesto financiero, se reemplaza el nuevo por el que vino en
+el balance tomado de base
+Creditos -> Se saca del presupuesto financiero, ultimas dos filas de cobros a realizar por una 
+venta.
+Bienes de cambio -> Es la mp, viene como dato como y cuando se paga, esta en la columna contado 
+en el presupuesto financiero
+Inversiones -> Viene como dato en la consigna, si ya hay en el balance proyectado anterior, se suma
+Activo no Corriente;
+Bienes de uso -> Son las amortizaciones
+Pasivo Corriente;
+Deudas Comerciales -> Es la deuda con los proveedores de mercaderia
+

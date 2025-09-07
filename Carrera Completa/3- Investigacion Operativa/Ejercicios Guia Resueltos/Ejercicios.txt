@@ -1,0 +1,88 @@
+1-
+2-
+3-
+4-OK
+5-OK
+6-
+7-
+8-OK
+9-OK
+10-OK
+11-OK
+12-OK
+13-OK
+14-OK
+15-OK
+16-OK
+17-OK
+18-PREGUNTAR YA QUE ES EL GRAFICO DEL 14 , EL 14 ES NO FORMACION DE POLIGONOS PERO EN ESTE GRAFICO DA UN RESULTADO
+19-NO (es el grafico del 16)
+
+
+
+Trasnporte:
+1-METODO NO APRENDIDO
+2-
+3-METODO NO APRENDIDO
+4-OK
+5-no
+6-OK
+7-OK
+8-METODO NO APRENDIDO
+9-METODO NO APRENDIDO
+10-OK
+11-METODO NO APRENDIDO
+12-OK
+13-OK
+14-OK
+
+Asignacion:
+1-OK
+2-OK
+3-OK
+4-OK
+5-OK
+6-OK
+7-OK
+8-OK
+9-OK
+
+Teoria de Juegos:
+1-OK
+2-OK
+3-OK
+4-OK
+5-OK
+6-OK
+7-OK
+8-OK
+9-
+10-
+11-
+12-
+13-
+14-OK
+15-OK
+16-OK
+17-OK
+18-
+19-
+20-OK
+
+Camino critico:
+1-
+2-
+3-
+4-
+5-OK
+6-OK
+7-
+8-OK(en la guia esta mal el resultado lo hicimos con profe)
+9-OK
+10-
+11-OK
+12-
+13-OK
+14-
+
+

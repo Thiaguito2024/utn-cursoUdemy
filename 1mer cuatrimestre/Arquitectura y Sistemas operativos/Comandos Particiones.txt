@@ -1,0 +1,7 @@
+Comandos para particiones:
+/dev -> Estan todos los dispositivos de almacenamiento.
+Los que empiezan con "sda" son los discos rigidos
+/dev/xxyN:
+xx-> Las dos primetas letras hacen referencia al tipo de dispositivo.
+y -> Indica el numero de dispositivo.
+N -> Indica el numero de particion.

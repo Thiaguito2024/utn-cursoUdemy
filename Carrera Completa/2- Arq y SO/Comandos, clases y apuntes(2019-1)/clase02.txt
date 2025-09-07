@@ -1,0 +1,22 @@
+    1  clear #para limpiar la pantalla
+    2  mkdir clases/clase02/carpetaaborrar
+    3  rmdir clases/clase02/carpetaaborrar/ #rm dir se utiliza para borrar directorios
+    4  mkdir clases/clase02/carpetaaborrar
+    5  echo "esto es algo" > clases/clase02/carpetaaborrar/txtparaborrar.txt
+    7  rmdir clases/clase02/carpetaaborrar/ #sin embargo, no puede borrar directorios si estos no estan vacios
+    8  rm -r clases/clase02/carpetaaborrar #con -r, borra independientemente de si esta vacio o no
+
+    3  wc clases/clase02/clase02.txt #muetra caracteres de txt
+
+    1  echo "esto va a ser movido/copiado/directeado" >> clases/clase02/prueba.txt
+    2  mv clases/clase02/prueba.txt clases #mueve elemento a donde se diga
+    3  cp clases/prueba.txt clases/clase02 #copia elemento a donde se diga
+    4  rm clases/prueba.txt #elimina
+    5  history >> clases/clase02/clase02.txt
+    6  ln clases/clase02/prueba.txt clases #crea un enlace
+    7  echo "esto esta siendo modificado, tambien cambiara en el original" >> clases/prueba.txt 
+    8  rm clases/clase02/prueba.txt #se borra el orginal, mas prueba en clases sigue existiendo
+    9  history >> clases/clase02/clase02.txt
+
+tambiene xisten los enlaces simbolicos, ln -s. 
+

@@ -1,0 +1,301 @@
+Prof. Santos Sanchez
+
+Deployment o despliege de aplicación:
+======================================
+Poner mi aplicación que está en mi computadora, subirlo al servidor y ejecutarlo para ponerlo a disposición del usuario
+
+ejemplo despliegue 
+Desarrollo: El desarrollador instala Java, las dependencias de la aplicación y configura el entorno en su máquina local.
+
+las depencias son un módulo de software que se descarga y se reutiliza
+ej: JCE de Java (Java Cryptography Extension) depencia que nos permite encriptar datos 
+
+ej: Desarrollamos una aplicación en Java (home banking) y luego hay que subirlo al servidor y ponerlo a disposición de los clientes, esto es desplegar una aplicación
+
+Despliegue:
+Servidor: Se prepara un servidor con el sistema operativo adecuado y se instalan Java y las dependencias necesarias.
+Configuración: Se configuran variables de entorno, rutas, permisos y otros ajustes específicos.
+Copiar archivos: Los archivos de la aplicación se copian al servidor.
+Iniciar la aplicación: Se inicia la aplicación utilizando un gestor de procesos como pm2 o systemd.
+
+Problemas comunes:
+Incompatibilidades de entorno: Diferencias en las versiones de Java, paquetes o configuraciones entre el entorno de desarrollo y producción pueden causar errores.
+Conflictos de dependencias: Si se instalan múltiples aplicaciones en el mismo servidor, pueden surgir conflictos por dependencias compartidas.
+Tiempo de configuración: La configuración del entorno de producción puede ser compleja y llevar mucho tiempo.
+Escalabilidad: Escalar la aplicación puede requerir la creación de múltiples servidores y la configuración manual de cada uno.
+
+
+Con Docker:
+Desarrollo: El desarrollador crea un Dockerfile que define todas las instrucciones para construir la imagen del contenedor. Esto incluye la instalación de Java, las dependencias, la copia de los archivos de la aplicación y la configuración de la aplicación.
+Despliegue:
+Crear la imagen: Se construye la imagen del contenedor a partir del Dockerfile.
+Ejecutar el contenedor: Se ejecuta el contenedor en el servidor de producción.
+
+
+Contenerización: 
+===============
+Empaquetado para tus Aplicaciones
+La contenerización empacar una aplicación y todas sus dependencias en una caja o contenedor aislada y portátil. 
+garantiza que la aplicación funcione de la misma manera en cualquier entorno, ya sea tu computadora local, un servidor en la nube o cualquier otro sistema compatible.
+
+
+¿Por qué es tan útil?
+Portabilidad: Los contenedores pueden ejecutarse en cualquier máquina con un motor de contenedores (como Docker) instalado, sin importar el sistema operativo
+Eficiencia: Al compartir el sistema operativo del host, los contenedores son más ligeros y se inician más rápido que las máquinas virtuales tradicionales.
+Escalabilidad: Puedes crear y destruir contenedores rápidamente, lo que facilita escalar tus aplicaciones según la demanda.
+Aislamiento: Cada contenedor es un entorno aislado, 
+
+
+¿Cuáles son las principales herramientas?
+Docker: La herramienta más popular para crear y gestionar contenedores.
+Kubernetes: Una plataforma de orquestación que permite gestionar grandes despliegues de contenedores.
+
+
+Cómo funciona la contenerización?
+Creación de una imagen: Se crea una imagen del contenedor, que es una plantilla inmutable que contiene el código de la aplicación y todas sus dependencias.
+Ejecución de un contenedor: A partir de la imagen, se crea un contenedor en ejecución, que es una instancia en vivo de la aplicación.
+Gestión de contenedores: Se utilizan herramientas como Docker para gestionar el ciclo de vida de los contenedores (crear, iniciar, detener, eliminar, etc.).
+
+
+
+
+
+
+Los Orígenes de la Contenerización: chroot y lxc
+===================================
+¿Qué es chroot? Chroot es una función del sistema operativo Unix que permite cambiar la raíz del árbol de directorios de un proceso y sus descendientes. En términos simples, crea un entorno aislado dentro del sistema operativo.
+
+
+La Evolución: LXC (Linux Containers)
+¿Qué es LXC? LXC es una tecnología de virtualización a nivel de sistema que permite crear contenedores de Linux. A diferencia de las máquinas virtuales completas, los contenedores LXC comparten el núcleo del sistema operativo del host, lo que los hace más ligeros y eficientes.
+
+¿Cómo se relaciona con Docker? LXC proporcionó muchas de las características fundamentales que luego se incorporaron a Docker, como la capacidad de crear múltiples contenedores aislados en un solo host. 
+Docker, en esencia, tomó los conceptos de LXC y los hizo más fáciles de usar y accesibles para una audiencia más amplia.
+
+
+Dockerización de Aplicaciones:
+==============================
+La dockerización es el proceso de empaquetar una aplicación y todas sus dependencias en un contenedor aislado y portátil. Es como crear una caja personalizada para tu aplicación, asegurando que funcione de la misma manera en cualquier entorno, ya sea tu computadora local, un servidor en la nube o cualquier otro sistema compatible.
+
+
+Ver imagen
+Encapsulamiento en Virtualización y Dockerización:
+==================================================
+la virtualización tradicional como la dockerización utilizan el concepto de encapsulamiento para aislar aplicaciones, sus dependencias y entornos. 
+
+
+Encapsulamiento en Virtualización Tradicional (Máquinas Virtuales)
+==============================================
+Concepto: Crea una copia virtual completa de un hardware físico, incluyendo el sistema operativo, aplicaciones y configuraciones. Cada máquina virtual (VM) funciona como un ordenador independiente.
+
+Encapsulamiento: La VM encapsula todo el sistema operativo y sus aplicaciones dentro de una capa de abstracción proporcionada por el hipervisor. Esta capa simula el hardware real, permitiendo que múltiples VMs funcionen simultáneamente en un solo servidor físico.
+
+
+Ventajas del encapsulamiento en VM:
+Aislamiento total: Cada VM tiene su propio sistema operativo, lo que garantiza una alta seguridad y evita conflictos entre aplicaciones.
+Flexibilidad: Permite ejecutar diferentes sistemas operativos en un mismo hardware.
+
+
+
+Encapsulamiento en Dockerización
+================================
+Concepto: Empaqueta una aplicación y todas sus dependencias en un contenedor, creando un entorno de ejecución aislado y portátil.
+Encapsulamiento: El contenedor encapsula la aplicación y sus bibliotecas, pero comparte el núcleo del sistema operativo kernel del host con otros contenedores. Esto lo hace más ligero y eficiente que una VM.
+
+Ventajas del encapsulamiento en contenedores:
+Portabilidad: Un contenedor puede ejecutarse en cualquier máquina con un motor de contenedores, como Docker.
+Escalabilidad: Los contenedores se pueden iniciar y detener rápidamente, lo que facilita la escalabilidad de aplicaciones.
+Eficiencia: Al compartir el núcleoo o kernel del sistema operativo, los contenedores consumen menos recursos que las VMs.
+
+¿Cuál es la diferencia con una máquina virtual? ver imagen 
+Característica				Máquina Virtual				Contenedor
+Aislamiento					Completo 					Parcial (comparte el so del host)
+Peso						Más pesado					Más ligero
+Inicio						Más lento					Más rápido
+Escalabilidad				Más lenta					Más rápida
+
+
+Microservicios a Gran Escala: 
+=============================
+Los microservicios a gran escala son una arquitectura de software que descompone una aplicación monolítica en pequeños servicios independientes. Cada uno de estos servicios se ejecuta en su propio proceso y se comunica con otros servicios a través de interfaces bien definidas, como APIs
+
+
+¿Por qué usar microservicios a gran escala?
+Escalabilidad: Permite escalar de forma independiente cada servicio según la demanda, optimizando el uso de recursos.
+Agilidad: Facilita la implementación de cambios rápidos y frecuentes, ya que cada servicio puede ser desarrollado, desplegado y actualizado de manera autónoma.
+Resiliencia: Al aislar los fallos en servicios individuales, se evita que toda la aplicación colapse.
+Tecnología: Permite utilizar diferentes tecnologías para cada servicio, según las necesidades específicas.
+
+
+Ejemplo:
+aplicación Mercado Libre. En una arquitectura monolítica, todas las funcionalidades (catálogo, carrito de compras, pagos, etc.) estarían en una sola aplicación. En una arquitectura de microservicios, cada funcionalidad sería un servicio independiente:
+
+Servicio de catálogo: Gestiona la información de los productos.
+Servicio de carrito: Permite a los usuarios agregar productos al carrito.
+Servicio de usuario: Administración de usuario: cargar datos, poner foto perfil, 
+Servicio de pagos: Procesa los pagos.
+
+Ejemplo 
+Pedidos ya
+Servicio de usuario: Administración de usuario: cargar datos, poner foto perfil
+Servicio de seguimiento repartidor: seguimiento del repartidor 
+Servicio de catálogo: gestionar comprar y comunicarse con el local Motaza, enviar comprobante de pago, etc.
+
+
+
+Kubernetes: 
+Kubernetes es una plataforma de código abierto diseñada para automatizar el despliegue, escalado y gestión de aplicaciones contenedorizadas.
+
+OpenShift: 
+OpenShift es una distribución de Kubernetes empresarial desarrollada por Red Hat.
+
+OKD:
+OKD es la versión de código abierto de OpenShift.
+
+
+=======================================================================================
+=======================================================================================
+
+Práctica:
+=========
+
+Instalar Docker:
+================
+https://docs.docker.com/engine/install/ubuntu/
+
+Desinstalar paquetes no oficiales
+for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
+	
+	
+configurar tu sistema Ubuntu para poder instalar Docker.
+	
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc	
+	
+	
+Para instalar la última versión, ejecute:	
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin	
+
+Verifique que la instalación de Docker Engine sea exitosa ejecutando la hello-worldimagen.
+sudo docker run hello-world
+
+
+
+Agregar tu usuario al grupo "docker" y luego relogearse
+sudo usermod -a -G docker $(whoami)
+
+Los comandos de Docker a menudo requieren privilegios de root para interactuar con el kernel y administrar contenedores. Al agregar tu usuario al grupo docker, le otorgas los permisos necesarios para ejecutar comandos de Docker sin necesidad de sudo cada vez.
+
+me vuelvo a logear para que aplique el cambios
+sudo su vagrant
+vbox visual, cerrar sesión 
+
+verifico
+id
+
+
+
+#Pongo el servicio de docker en enable -> (Para que tras un reinicio se levante)
+#Pongo el servicio de docker en runnig
+sudo systemctl enable --now docker
+
+#sudo valido el estado del servicio
+sudo systemctl status docker
+
+estructura dir de docker 
+sudo ls -l /var/lib/docker/
+
+
+clonar el repositorio docker
+ git clone https://github.com/upszot/UTN-FRA_SO_Docker.git
+
+ir a ejemplo0
+
+bajamos apache2 que está funcionando en el puerto 80 y lo necesitamos para docker
+sudo systemctl stop apache2
+
+
+ejecutar
+docker run -d -p 80:80 kennethreitz/httpbin
+
+
+Creas un nuevo contenedor Docker a partir de la imagen kennethreitz/httpbin
+contenedor de nombre httpbin del usuario kennethreitz 
+-d le pedimos que corra el contenedor en segundo plano y que nos muestre además el ID del mismo 
+
+kennethreitz/httpbin: Esta es la imagen de Docker que se utilizará para crear el contenedor. La imagen de HTTPbin contiene el servidor HTTP y todas sus dependencias.
+¿Dónde encontrar kennethreitz/httpbin?
+La imagen kennethreitz/httpbin se encuentra en Docker Hub, que es el registro de contenedores más grande y popular del mundo. Docker Hub es como un GitHub para imágenes de Docker, donde los desarrolladores pueden publicar y compartir sus imágenes.
+
+
+¿Qué hace el parámetro -p?
+mapear puertos entre el host (tu computadora) y el contenedor. 
+establece una conexión entre un puerto específico en tu máquina y un puerto específico dentro del contenedor. 
+
+80:80, esto significa:
+80 (antes de los dos puntos): Este es el puerto en tu host. El puerto 80 es el puerto HTTP estándar. Al acceder a http://localhost:80 en tu navegador, estás enviando una solicitud al puerto 80 de tu máquina.
+80 (después de los dos puntos): Este es el puerto en el contenedor. El puerto 80 dentro del contenedor también es el puerto HTTP estándar. 
+Cuando Docker recibe la solicitud en el puerto 80 de tu máquina, la reenvía al puerto 80 dentro del contenedor.
+
+
+Qué es HTTPBin?
+HTTPBin  una imagen de Docker que proporciona funciones para probar y depurar clientes HTTP. 
+una aplicación cliente que necesita hacer peticiones http
+GET: Obtener datos de un recurso. Por ejemplo, https://httpbin.org/get te devuelve información sobre la solicitud que hiciste.
+POST: Enviar datos a un servidor. Puedes enviar datos en el cuerpo de la solicitud para crear o actualizar recursos. Por ejemplo, https://httpbin.org/post te devuelve los datos que enviaste.
+Verificar encabezados HTTP
+Simular errores HTTP:
+
+
+
+
+Donde primero nos muestra que lo está descargando la imagen desde el repositorio del usuario y luego, en la última línea, nos muestra un código encriptado. Este código es el ID del proceso
+
+
+listar contenedores
+docker container ls
+
+Que nos lista todos los contenedores que están en ejecución, podemos ver que se encuentra el contenedor que acabamos de ejecutar, en la primer columna se encuentra el ID del contenedor, pero de manera reducida a como lo mostró antes, cuándo se creó, el estado y el puerto dónde se está ejecutando.
+
+
+comprobar que está corriendo 
+http://192.168.56.2:80/
+
+lo paramos
+docker stop 3be54941a473
+
+
+
+ejemplo1
+levantar docker ejemplo1
+docker run  -d   -p 80:80 -v "$PWD"/share/html:/usr/share/nginx/html nginx
+
+En este caso le estamos diciendo que inice el servicio de nginx (server web como apache) y le decimos que envie lo que nosotros tenemos en la ruta “$PWD”/share/html a la ruta /user/share/nginx/html del contenedor.
+
+copia el contenido de la carpeta html|
+/UTN-FRA_SO_Docker/ejemplo1/share/html a /user/share/nginx/html
+
+probar
+comprobar que está corriendo 
+http://192.168.56.2:80/
+
+muestra la página que tenemos en html
+
+
+
+Crear una imagen de docker y luego subirla a nuestro repo DockerHub
+===================================================================
+crear cuenta en 
+https://hub.docker.com/
+
+
+Una vez hecho nuestro usuario, debemos ir a los settings de la cuenta y en la parte de seguridad, generar un nuevo token de acceso que nos pedirá la consola al querer pushear la imagen.
+Si la cuenta la creamos con email y contraseña, este paso no será necesario.
+
+
+
+

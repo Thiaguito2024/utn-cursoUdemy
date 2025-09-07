@@ -1,0 +1,21 @@
+Montado de discos virtuales
+
+ls /dev/sd* #muestra las carpetas que empiezan con sd
+lsblk #visualiza los dispositivos, unidades, particiones y capacidades (montadas o no)
+df #comprobar si el disco esta montado
+fdisk sd_ #crea una nueva particion (n para crear, w final para guardar. enter enter +2G enter)
+mkfs /dev/sd__ #formatea la particion
+mount /dev/sd__ /disco_ #monta el disco en la direccion
+umount /disco_ #desmonta el disco
+
+
+Ejemplo con dos particiones en sdc
+  162  mkdir discoUno
+  163  ls
+  166  ls /dev/sd*
+  167  fdisk
+  168  lsblk
+  175  sudo fdisk sdc
+  176  lsblk
+  179  sudo mkfs /dev/sdc1 && sudo  mkfs /dev/sdc2
+  182  sudo mount /dev/sdc1 /home/user/discoUno/ && sudo mount /dev/sdc2 /home/user/discoUno/

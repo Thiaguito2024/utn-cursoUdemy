@@ -1,0 +1,36 @@
+ 1-
+mkdir discoUno && mkdir discoDos
+ls
+lsblk
+sudo fdisk /dev/sdb (n, ent, ent, ent, +4g, n, ent, ent, ent, ent, w)
+lsblk
+sudo mkfs /dev/sdb1
+sudo mkfs /dev/sdb2
+sudo mount /dev/sdb1 /home/selene/discoUno/
+sudo mount /dev/sdb2 /home/selene/discoDos/
+
+ 2-
+A)
+sudo useradd -m -s /bin/bash egresado
+sudo useradd -m -s /bin/bash profesor 
+sudo useradd -m -s /bin/bash bedel
+sudo groupadd UTN
+sudo useradd -g UTN profesor
+sudo useradd -g UTN bedel
+sudo useradd -g UTN egresado 
+su - profesor
+echo >> tareas.txt
+ls -ls
+chmod 740 tareas.txt
+ls -ls
+history > /home/profesor/tareas.txt
+su - egresado
+B)
+cat /home/profesor/tareas.txt
+C)
+sudo groupadd EXAMEN
+sudo usermod -g EXAMEN profesor
+sudo usermod -g EXAMEN egresado
+su - profesor 
+mkdir examenes
+chmod 740 /home/profesor/examenes

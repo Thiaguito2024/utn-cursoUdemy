@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./javascript/16/16.js"></script>
+</head>
+<body>
+<!--Confeccionar un formulario que permita ingresar el nombre de una persona, su mail, su
+DNI (documento nacional de identidad) y finalmente su currículum vitae (este último dato
+hacerlo utilizando un <TEXTAREA>). Al pulsar el botón btnAceptar , por medio de una
+función en TypeScript, mostrar todos sus datos por consola.-->
+<form action="./javascript/16/16.js"align="center">
+    <table align="center">
+        <tr>
+            <td>
+                <label for="inNombre">Nombre</label><br>
+                <input type="text"name="nombre"id="inNombre">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="inMail">Mail</label><br>
+                <input type="text" name="mail" id="inMail">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="inDni">DNI</label><br>
+                <input type="number"name="DNI"id="inDni">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="inCurr">Curriculum</label><br>
+                <textarea name="Curriculum" id="inCurr" cols="30" rows="10"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button"value="Mostrar"onclick="Mostrar()">
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

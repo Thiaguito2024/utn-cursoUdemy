@@ -1,0 +1,26 @@
+aqui pondria los pasos de como montar el tp si las hubiera guardado j3j3j3 pongo medio a mano alzada lo que supongo que era pero quien sabe
+
+wget https://download.owncloud.org/community/owncloud-10.0.2.zip
+cp -r /home/user/Downloads/owncloud/ /opt/lampp/htdocs/
+ls -la
+cat > /opt/lampp/etc/extra/httpd-owncloud.conf
+
+(lo de ahora no se si esta bien tipiado eh, lo paso porque me acuerdo que a mi me parecio que era un rompedero de huevos que no te lo dejen copiar y pegar, pero de vuelta, no lo estoy corriendo para saber si esta bien)
+####### 
+Alias /owncloud "var/www/owncloud/"
+
+<Directory /var/www/owncloud/>
+	Options +FollowSymLinks
+	AllowOverride All
+
+	<IfModule mod_dav.c>
+	 Dav off
+	</IfModule>
+
+	SetEnv HOME /var/www/owncloud
+	SetEnv HTTP_HOME /var/www/owncloud
+
+</Directory>
+#######
+chmod 777 /opt/lampp
+#INICIAR CON USERNAME TU NOMBRE Y PASS TU APELLIDO es una paja cambiarlo despues y el lo que va a pedir en la entrega

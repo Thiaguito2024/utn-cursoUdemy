@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct{
+    int id;
+    int anio;
+    char marca[31];
+    char modelo[31];
+    char color[31];
+}ECar;
+
+
+int main()
+{
+    FILE* f;
+    int cant;
+    char idaux[11];
+    char anioaux[11];
+
+    ECar cars;
+
+    f = fopen("autos.csv", "r");
+
+    if (f==NULL)
+    {
+        printf("Couln't read file!");
+        exit(1);
+    }
+
+    while (!feof(f))
+    {
+        cant = fscanf(f, "%[^,], %[^,], %[^,], %[^,], %[^\n]\n", idaux, cars.marca, cars.modelo, cars.color, anioaux);
+
+        if(cant!=5)
+        {
+            if(feof(f))
+            {
+                break;
+            }
+            else
+            {
+                printf("Unexpected error. Exiting...");
+                exit(1);
+            }
+        }
+
+        cars.id = atoi(idaux);
+        cars.anio = atoi(anioaux);
+        printf("%4d %18s %18s %18s %6d\n", cars.id, cars.marca, cars.modelo, cars.color, cars.anio);
+    }
+    return 0;
+}

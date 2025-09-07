@@ -1,0 +1,10 @@
+div{
+   background-color: rgba(187, 183, 157, 0.566); 
+   border: 2px solid black;
+   color: black;
+   padding: 50px;
+}
+
+input{
+    margin: 5px;
+}

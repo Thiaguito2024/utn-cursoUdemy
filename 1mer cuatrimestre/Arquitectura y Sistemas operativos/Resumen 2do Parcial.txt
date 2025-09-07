@@ -1,0 +1,325 @@
+============================================================= LVM ==============================================================================================
+Particionamiento y LVM:
+==============================
+
+¿Qué significa “particionar” un disco?
+Particionar un disco significa dividir un disco físico en varios discos lógicos. 
+cada partición es interpretada por el sistema operativo como discos independientes pero es un solo disco físico
+cada partición puede contener un sistema operativo diferente, aplicaciones específicas o datos particulares. 
+Esta división permite una mejor organización y gestión del espacio de almacenamiento.
+  
+La tabla de particiones se utiliza para poder especificar qué sectores físicos del disco corresponden a cada partición.
+  
+
+¿Por qué tener múltiples particiones?
+Tener múltiples particiones permite “encapsular” los datos. Esto quiere decir que cada partición tendrá su propio sistema de archivos,
+que será independiente del resto de las particiones. 
+ 
+  
+Administración de Volúmenes Lógicos (Logical Volume Manager)
+============================================================
+Logical Volume Manager (Gestor de Volúmenes Lógicos): 
+Volumen Lógico: dispositivo donde se almacenan archivos de manera persistente, por ej: HDD, SSD, NAS (Sistemas de Almacenamiento Red), Partición, Pen Drive 
+Los volumenes logicos son una herramienta de software que proporciona una capa de abstracción entre el sistema operativo y
+los dispositivos de almacenamiento físico  (discos duros, particiones).
+Esto significa que te permite ver y gestionar tu almacenamiento de una manera más flexible y potente que si trabajaras directamente con los dispositivos físicos.
+ 
+¿Ventajas LVM?
+Flexibilidad:
+Creación y redimensionamiento de volúmenes: Podes crear volúmenes lógicos de cualquier tamaño y cambiar su tamaño sobre la marcha, 
+sin necesidad de reiniciar el sistema.
+Agrupación de dispositivos: Podes combinar múltiples discos físicos en un solo grupo de volúmenes, lo que te permite administrarlos como una sola entidad.
+
+Disponibilidad:
+Creación de espejos: Podes duplicar un volumen lógico en múltiples discos para aumentar la redundancia y proteger tus datos en caso de fallo de un disco.
+Creación de instantáneas snapshot: Podes crear copias instantáneas de un volumen lógico en un punto específico en el tiempo,
+lo que te permite realizar copias de seguridad o experimentar con diferentes configuraciones sin afectar los datos originales.
+
+Gestión simplificada:
+Nombres descriptivos: Podes asignar nombres descriptivos a tus volúmenes lógicos en lugar de utilizar identificadores de dispositivos físicos.
+Herramientas de gestión: LVM proporciona una serie de herramientas de línea de comandos y gráficas para administrar tus volúmenes de forma sencilla.
+
+Resumen:
+Flexibilidad: Podes redimensionar volúmenes lógicos sin afectar a otros datos.
+Snapshots: Permite crear "fotos" de volúmenes para fines de respaldo o pruebas.
+Migración de Discos: Podes mover datos entre discos sin interrumpir el servicio.
+
+Qué implica el soporte a largo plazo?
+Cuando una versión de un sistema operativo es catalogada como LTS, significa que los desarrolladores se comprometen a:
+Corregir errores: Arreglarán los bugs y vulnerabilidades de seguridad que se vayan descubriendo durante ese periodo.
+Actualizar paquetes: Mantendrán actualizados los paquetes de software esenciales, garantizando que el sistema siga funcionando de forma óptima y segura.
+Ofrecer soporte técnico: Los usuarios podrán recibir ayuda y asistencia técnica durante todo el periodo de soporte.
+   
+Conceptos Básicos de LVM: 
+=========================
+Volumen Físico (Phisical Volume): 
+Es la unidad de almacenamiento física más pequeña que LVM reconoce. 
+Puede ser una partición de un disco duro, un disco duro entero o incluso un dispositivo de almacenamiento conectado por red (NAS).
+ 
+Grupo de Volúmenes (Volume Group): 
+Un conjunto de uno o más volúmenes físicos que se agrupan para formar una única entidad lógica.
+
+Volumen Lógico (Logical Volume): 
+Una partición lógica dentro de un grupo de volúmenes. Es el volumen que el sistema operativo ve y utiliza como un dispositivo de bloque normal.
+ 
+Comandos Básicos:
+===================
+lsblk: Para ver discos y particiones
+
+pvs/sudo pvs: Muestra información sobre los volúmenes físicos. Te indica el dispositivo, el grupo de volúmenes al que pertenece, su tamaño, espacio libre, etc.
+
+vgs/sudo vgs: Muestra información sobre los grupos de volúmenes. Te indica el nombre del grupo, el tamaño total, el espacio libre, etc.
+
+lvs/sudo lvs: Muestra información sobre los volúmenes lógicos. Te indica el nombre del volumen lógico, el grupo de volúmenes al que pertenece, el tamaño, etc.
+
+df -h: Indica al sistema que muestre información sobre el espacio libre en disco. como humano
+"disk free". Indica al sistema que muestre información sobre el espacio libre en disco. como humano
+  
+Filesystem: El nombre del sistema de archivos o dispositivo.
+Size: El tamaño total del sistema de archivos.
+Used: El espacio utilizado en el sistema de archivos.
+Avail: El espacio disponible en el sistema de archivos.
+Use%: El porcentaje de espacio utilizado.
+
+Mounted on: El punto de montaje donde el sistema de archivos está accesible.
+mostrar infor del pv de sda1
+sudo pvdisplay /dev/sdc
+
+
+===================================================================== ANSIBLE ==================================================================================
+¿Que es la automatización?
+consiste en la programación de tareas para que se ejecuten de manera automática en momentos específicos o según ciertas condiciones, 
+sin la intervención manual del usuario o ejecutar varias tareas en muchos dispositivios (pc, notebook, server)   
+
+¿Por qué automatizar en un SO?
+Ahorro de tiempo: Elimina la necesidad de realizar tareas repetitivas de forma manual.
+Reducción de errores: Minimiza el riesgo de errores humanos al automatizar procesos.
+Mayor eficiencia: Optimiza el uso de recursos del sistema.
+Escalabilidad: Facilita la gestión de sistemas complejos y en crecimiento.
+Flexibilidad: Permite adaptar los procesos a las necesidades específicas de cada sistema.
+
+Ejemplos de tareas automatizables:
+Copias de seguridad: Programar copias de seguridad de datos a intervalos regulares.
+Actualizaciones del sistema: Instalar automáticamente actualizaciones de software y seguridad.
+Reinicio de servicios: Reiniciar servicios que se hayan bloqueado o que requieran un reinicio periódico.
+Monitoreo del sistema: Supervisar el estado del sistema y enviar alertas en caso de problemas.
+Deployment de aplicaciones: Desplegar aplicaciones de forma automática en múltiples servidores.
+test: test de estres para cada deploy
+
+Herramientas clave para la automatización en Linux:
+Cron: Es la herramienta más utilizada para programar tareas en Linux. Permite ejecutar comandos o scripts a intervalos regulares o en momentos específicos.
+Ansible: Es una herramienta de gestión de configuración que permite automatizar la instalación, configuración y gestión de sistemas.
+Terraform, Puppet: Similar a Ansible
+   
+Ansible:
+Ansible es una herramienta de automatización que permite realizar configuraciones, instalación de software y despliegue de aplicaciones de forma remota
+en varios servidores al mismo tiempo. 
+  
+Ejemplo: tengo 10  máquinas y necesito instalar un servidor web en todas. En lugar de repetir los mismos pasos en cada máquina, 
+podes decirle a Ansible que lo haga por vos. 
+
+Ventajas:
+- Eficiencia: Definis las tareas una vez y mediante Ansible las aplica a varios servidores.
+- Reproducibilidad: Aseguras que todos los servidores tienen las mismas configuraciones.
+- Fácil de usar: No requiere que instales software en los servidores gestionados, solo necesitas tener acceso por SSH.
+
+Inventario:
+El inventario es un archivo que contiene la lista de servidores donde Ansible va a ejecutar las instrucciones.
+ 
+Ejemplo
+[produccion]
+192.168.56.101
+192.168.56.102
+  
+[desarrollo]
+192.168.56.103
+192.168.56.105
+
+[testing]
+192.168.56.104
+ 
+Playbook:
+es un archivo en formato YAML que contiene las instrucciones que Ansible va a ejecutar en los servidores
+YAML (YAML Ain't Markup Language, YAML no es lenguaje de marcado):
+es un formato de serialización de datos que se ha vuelto muy popular en la configuración de sistemas y la automatización. 
+Es legible por humanos y fácil de escribir, lo que lo convierte en una excelente opción para crear archivos de configuración que sean comprensibles 
+tanto por personas como por máquinas.
+
+Ejemplo:  
+ - name: Instalar servidor web Apache
+     hosts: desarrollo
+     tasks:
+       - name: Actualizar lista de paquetes
+         apt:
+          update_cache: yes
+      - name: Instalar Apache2
+         apt:
+           name: apache2
+           state: present
+       - name: Iniciar y habilitar servicio Apache
+         service:
+           name: apache2
+           state: started
+           enabled: yes
+   
+   
+Hosts  
+Son los servidores o grupos de servidores sobre los que Ansible ejecutará las tareas. Estos hosts se especifican en el inventario 
+
+Módulos  
+es una función predefinida por Ansible que realiza una tarea específica . 
+Por ejemplo, el módulo apt se utiliza para gestionar paquetes en sistemas basados en Ubuntu.
+- name: Instalar Apache
+     apt:
+       name: apache2
+      state: present
+   
+
+apt es el módulo.
+name: apache2 y state: present son instrucciones que configuran cómo se utilizará el módulo apt.
+   
+Ansible tiene módulos predefinidos para manejar diferentes sistemas operativos y servicios.
+
+¿Qué es una IP?
+Internet Protocol. Es un conjunto de reglas y normas que permiten que los dispositivos conectados a una red (como internet) puedan comunicarse entre sí 
+  
+Diferencia entre ip y nombre dominio:
+El nombre dominio es el nombre de la pagina, por ejemplo google.com o facebook.com
+IP es la dirección que le da el Internet Protocol para identificar un dispositivios en la red (como internet)
+
+DNS:
+Servidor que nos devuelve una ip para un nombre de dominio, por ejemplo: google.com -> 142.251.133.78 se puede averiguar con nslookup google.com
+
+Cada dispositivo conectado a una red (tu computadora, tu teléfono, un servidor web, etc.) tiene una dirección IP única que lo identifica, 
+por ejemplo: 192.168.1.1
+
+¿Qué es una IP Pública?
+Es un número único que identifica tu dispositivo (computadora, teléfono, etc.) en la red global. 
+La IP privada, es el tipo de ip que se utiliza dentro de redes locales (como tu hogar o una oficina), una IP pública es visible para todos en internet.
+
+MAC Address:
+windows -> ipconfig /all
+Dirección física: 7C-7A-91-D4-8F-41 -> mac address 
+
+Es un identificador de la placa de red, este id es siempre el mismo, viene grabada en el hardware de la placa 
+
+¿Que es un puerto?
+Es un número que identifica algún servicio en tu computadora.
+Por ejemplo: como un navegador web, un cliente de correo electrónico, un servidor de juegos, 
+Ejemplos de puertos comunes:
+Puerto 80: HTTP (Hypertext Transfer Protocol) html hipertexto, utilizado para la navegación web.
+Puerto 443: HTTPS (Hypertext Transfer Protocol Secure), una versión encriptada de HTTP.
+Puerto 25: SMTP (Simple Mail Transfer Protocol), utilizado para enviar correos electrónicos.
+Puerto 21: FTP (File Transfer Protocol), utilizado para transferir archivos.
+
+===================================================================== DOCKER ==================================================================================
+Deployment o despliege de aplicación:
+====================================
+Proceso de poner en marcha una aplicación en un entorno de producción, es el paso final que lleva una aplicación desde su estado de desarrollo a 
+estar disponible para los usuarios finales.
+Poner mi aplicación que está en mi computadora, subirlo al servidor y ejecutarlo para ponerlo a disposición del usuario
+ 
+Por ejemplo
+Desarrollo: El desarrollador en el servidor instala Java, las dependencias de la aplicación y configura el entorno en su máquina local,
+luego ejecuta la aplicación para que esté disponible por los usuarios en internet.
+ 
+Las dependencias son un módulo de software que se descarga y se reutiliza
+Por ejemplo:
+JCE de Java (Java Cryptography Extension) dependencia que nos permite encriptar datos, esta la debemos instalar en el server para que funcione la aplicación
+
+Despliegue:
+Servidor: Se prepara un servidor con el sistema operativo adecuado y se instalan Java y las dependencias necesarias.
+Configuración: Se configuran variables de entorno, rutas, permisos y otros ajustes específicos.
+Copiar archivos: Los archivos de la aplicación se copian al servidor.
+Iniciar la aplicación: Se inicia la aplicación utilizando un gestor de procesos como pm2 o systemd.
+   
+Problemas comunes en despliegues:
+Incompatibilidades de entorno: Diferencias en las versiones de Java, paquetes o configuraciones entre el entorno de desarrollo y producción pueden 
+causar errores.
+Conflictos de dependencias: Si se instalan múltiples aplicaciones en el mismo servidor, pueden surgir conflictos por dependencias compartidas.
+Tiempo de configuración: La configuración del entorno de producción puede ser compleja y llevar mucho tiempo.
+Escalabilidad: Escalar la aplicación puede requerir la creación de múltiples servidores y la configuración manual de cada uno.
+ 
+Despliege Con Docker:
+====================
+Desarrollo: El desarrollador crea un Dockerfile que define todas las instrucciones para construir la imagen del contenedor. 
+Esto incluye la instalación de Java, las dependencias, la copia de los archivos de la aplicación y la configuración de la aplicación.
+Despliegue:
+Crear la imagen: Se construye la imagen del contenedor a partir del Dockerfile.
+Ejecutar el contenedor: Se ejecuta el contenedor en el servidor de producción.
+ 
+Contenerización: 
+===============
+Empaquetado para tus Aplicaciones
+La contenerización empacar una aplicación y todas sus dependencias en una caja o contenedor aislada y portátil. 
+garantiza que la aplicación funcione de la misma manera en cualquier entorno, ya sea tu computadora local, un servidor en la nube o
+cualquier otro sistema compatible.
+
+¿Por qué es tan útil?
+Portabilidad: Los contenedores pueden ejecutarse en cualquier máquina con un motor de contenedores (como Docker) instalado, sin importar el sistema operativo
+Eficiencia: Al compartir el sistema operativo del host, los contenedores son más ligeros y se inician más rápido que las máquinas virtuales tradicionales.
+Escalabilidad: Puedes crear y destruir contenedores rápidamente, lo que facilita escalar tus aplicaciones según la demanda.
+Aislamiento: Cada contenedor es un entorno aislado, 49   
+
+¿Cuáles son las principales herramientas?
+Docker: La herramienta más popular para crear y gestionar contenedores.
+Kubernetes: Una plataforma de orquestación que permite gestionar grandes despliegues de contenedores.
+
+Cómo funciona la contenerización?
+Creación de una imagen: Se crea una imagen del contenedor, que es una plantilla inmutable que contiene el código de la aplicación y todas sus dependencias.
+Ejecución de un contenedor: A partir de la imagen, se crea un contenedor en ejecución, que es una instancia en vivo de la aplicación.
+Gestión de contenedores: Se utilizan herramientas como Docker para gestionar el ciclo de vida de los contenedores (crear, iniciar, detener, eliminar, etc.).
+
+Dockerización de Aplicaciones:
+==============================
+La dockerización es el proceso de empaquetar una aplicación y todas sus dependencias en un contenedor aislado y portátil. 
+Es como crear una caja personalizada para tu aplicación, asegurando que funcione de la misma manera en cualquier entorno, ya sea tu computadora local,
+un servidor en la nube o cualquier otro sistema compatible.
+
+Encapsulamiento en Virtualización y Dockerización:
+==================================================
+la virtualización tradicional como la dockerización utilizan el concepto de encapsulamiento para aislar aplicaciones, sus dependencias y entornos. 
+   
+Encapsulamiento en Virtualización Tradicional (Máquinas Virtuales)
+==============================================
+Concepto: Crea una copia virtual completa de un hardware físico, incluyendo el sistema operativo, aplicaciones y configuraciones. 
+Cada máquina virtual (VM) funciona como un ordenador independiente.
+Encapsulamiento: La VM encapsula todo el sistema operativo y sus aplicaciones dentro de una capa de abstracción proporcionada por el hipervisor. 
+Esta capa simula el hardware real, permitiendo que múltiples VMs funcionen simultáneamente en un solo servidor físico.
+ 
+Ventajas del encapsulamiento en VM:
+Aislamiento total: Cada VM tiene su propio sistema operativo, lo que garantiza una alta seguridad y evita conflictos entre aplicaciones.
+Flexibilidad: Permite ejecutar diferentes sistemas operativos en un mismo hardware.
+ 
+Encapsulamiento en Dockerización
+================================
+Concepto: Empaqueta una aplicación y todas sus dependencias en un contenedor, creando un entorno de ejecución aislado y portátil.
+Encapsulamiento: El contenedor encapsula la aplicación y sus bibliotecas, pero comparte el núcleo del sistema operativo kernel del host con otros contenedores. 
+Esto lo hace más ligero y eficiente que una VM.
+
+Ventajas del encapsulamiento en contenedores:
+Portabilidad: Un contenedor puede ejecutarse en cualquier máquina con un motor de contenedores, como Docker.
+Escalabilidad: Los contenedores se pueden iniciar y detener rápidamente, lo que facilita la escalabilidad de aplicaciones.
+Eficiencia: Al compartir el núcleoo o kernel del sistema operativo, los contenedores consumen menos recursos que las VMs.
+
+
+  
+Microservicios a Gran Escala: 
+=============================
+Los microservicios a gran escala son una arquitectura de software que descompone una aplicación monolítica en pequeños servicios independientes. Cada uno de estos servicios se ejecuta en su propio proceso y se comunica con otros servicios a través de interfaces bien definidas, como APIs
+  
+¿Por qué usar microservicios a gran escala?
+Escalabilidad: Permite escalar de forma independiente cada servicio según la demanda, optimizando el uso de recursos.
+Agilidad: Facilita la implementación de cambios rápidos y frecuentes, ya que cada servicio puede ser desarrollado, desplegado y actualizado de manera autónoma.
+Resiliencia: Al aislar los fallos en servicios individuales, se evita que toda la aplicación colapse.
+Tecnología: Permite utilizar diferentes tecnologías para cada servicio, según las necesidades específicas.
+  
+Kubernetes: 
+===========
+Kubernetes es una plataforma de código abierto diseñada para automatizar el despliegue, escalado y gestión de aplicaciones contenedorizadas.
+
+OpenShift: 
+OpenShift es una distribución de Kubernetes empresarial desarrollada por Red Hat.
+  
+OKD:
+OKD es la versión de código abierto de OpenShift.

@@ -1,0 +1,36 @@
+-ALFA-
+Se crea el repo en github agregando el readme
+git clone LINKREPO
+cd CARPETA TP
+cat >> datos.txt - ctr z
+git init
+git add . 
+git commit -m "ALFA"
+git push -u origin master
+
+-BETA-
+git clone LINKREPO
+cd CARPETA TP
+ipconfig (anotar ip)
+nano datos.txt - ctr o ctr z 
+git init
+git add . 
+git commit -m "BETA"
+git push -u origin master
+
+-GAMA-
+git clone LINKREPO
+cd CARPETA TP
+ipconfig (anotar ip)
+nano datos.txt - ctr o ctr z 
+git init
+git add . 
+git commit -m "GAMMA"
+git push -u origin master
+
+
+si, si, si
+
+
+
+

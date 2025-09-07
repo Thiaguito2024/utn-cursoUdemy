@@ -1,0 +1,278 @@
+Prof. Santos Sanchez
+
+¿Que es la automatización?
+consiste en la programación de tareas para que se ejecuten de manera automática en momentos específicos o según ciertas condiciones, sin la intervención manual del usuario
+o ejecutar varias tareas en muchos dispositivios (pc, notebook, server)  
+
+¿Por qué automatizar en un SO?
+Ahorro de tiempo: Elimina la necesidad de realizar tareas repetitivas de forma manual.
+Reducción de errores: Minimiza el riesgo de errores humanos al automatizar procesos.
+Mayor eficiencia: Optimiza el uso de recursos del sistema.
+Escalabilidad: Facilita la gestión de sistemas complejos y en crecimiento.
+Flexibilidad: Permite adaptar los procesos a las necesidades específicas de cada sistema.
+
+Ejemplos de tareas automatizables:
+Copias de seguridad: Programar copias de seguridad de datos a intervalos regulares.
+Actualizaciones del sistema: Instalar automáticamente actualizaciones de software y seguridad.
+Reinicio de servicios: Reiniciar servicios que se hayan bloqueado o que requieran un reinicio periódico.
+Monitoreo del sistema: Supervisar el estado del sistema y enviar alertas en caso de problemas.
+Deployment de aplicaciones: Desplegar aplicaciones de forma automática en múltiples servidores.
+test: test de estres para cada deploy
+
+Herramientas clave para la automatización en Linux:
+Cron: Es la herramienta más utilizada para programar tareas en Linux. Permite ejecutar comandos o scripts a intervalos regulares o en momentos específicos.
+Ansible: Es una herramienta de gestión de configuración que permite automatizar la instalación, configuración y gestión de sistemas.
+Terraform, Puppet: Similar a Ansible
+
+
+Ansible:
+Ansible es una herramienta de automatización que permite realizar configuraciones, instalación de software y despliegue de aplicaciones de forma 
+remota en varios servidores al mismo tiempo. 
+
+Ejemplo: tengo 10  máquinas y necesitas instalar un servidor web en todas. En lugar de repetir los mismos pasos en cada máquina,
+ puedes decirle a Ansible que lo haga por ti. 
+
+Ventajas:
+- Eficiencia: Defines las tareas una vez y mediante Ansible las aplica a varios servidores.
+- Reproducibilidad: Aseguras que todos los servidores tienen las mismas configuraciones.
+- Fácil de usar: No requiere que instales software en los servidores gestionados, solo necesitas tener acceso por SSH.
+
+
+Inventario:
+El inventario es un archivo que contiene la lista de servidores donde Ansible va a ejecutar las instrucciones.
+
+Ejemplo
+[produccion]
+192.168.56.101
+192.168.56.102
+
+[desarrollo]
+192.168.56.103
+192.168.56.105
+
+[testing]
+192.168.56.104
+
+
+Playbook:
+es un archivo en formato YAML que contiene las instrucciones que Ansible va a ejecutar en los servidores
+
+YAML:
+YAML (YAML Ain't Markup Language, YAML no es lenguaje de marcado)
+es un formato de serialización de datos que se ha vuelto muy popular en la configuración de sistemas y la automatización. 
+Es legible por humanos y fácil de escribir, lo que lo convierte en una excelente opción para crear archivos de configuración que sean 
+comprensibles tanto por personas como por máquinas.
+
+Ejemplo:  
+
+- name: Instalar servidor web Apache
+  hosts: desarrollo
+  tasks:
+    - name: Actualizar lista de paquetes
+      apt:
+        update_cache: yes
+    - name: Instalar Apache2
+      apt:
+        name: apache2
+        state: present
+    - name: Iniciar y habilitar servicio Apache
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+
+
+Hosts  
+son los servidores o grupos de servidores sobre los que Ansible ejecutará las tareas. Estos hosts se especifican en el inventario 
+
+
+Módulos  
+es una función predefinida por Ansible que realiza una tarea específica . 
+Por ejemplo, el módulo apt se utiliza para gestionar paquetes en sistemas basados en Ubuntu.
+- name: Instalar Apache
+  apt:
+    name: apache2
+    state: present
+
+apt es el módulo.
+name: apache2 y state: present son instrucciones que configuran cómo se utilizará el módulo apt.
+	
+Ansible tiene módulos predefinidos para manejar diferentes sistemas operativos y servicios.
+
+
+Diferencia entre ip y nombre dominio:
+Nombre dominio el nombre de la pagina google.com facebook.com
+IP es la dirección que le da Internet Protocol para identificar un dispositivos en la red (como internet)
+
+DNS:
+Servidor que nos devuelve una ip para un nombre de dominio, por ejemplo: google.com -> 142.251.133.78
+se puede averiguar con nslookup google.com
+
+
+
+¿Qué es una IP?
+Internet Protocol. Es un conjunto de reglas y normas que permiten que los dispositivos conectados a una red (como internet) 
+puedan comunicarse entre sí.
+
+Cada dispositivo conectado a una red (tu computadora, tu teléfono, un servidor web, etc.) tiene una dirección IP única que lo identifica.
+
+ejemplo: 192.168.1.1
+
+
+¿Qué es una IP Pública?
+Es un número único que identifica tu dispositivo (computadora, teléfono, etc.) en la red global. 
+La IP privada, que se utiliza dentro de redes locales (como tu hogar o una oficina), una IP pública es visible para todos en internet.
+
+ip del dipositivo y otros campos
+windows -> git 
+ipconfig 
+
+MAC Address:
+windows -> ipconfig /all
+Dirección física: 7C-7A-91-D4-8F-41 -> mac address 
+Es un identificador de la placa de red, este id es siempre el mismo, viene grabada en el hardware de la placa 
+
+¿Que es un puerto?
+Es un número que identifica algún servicio en tu computadora.
+Por ejemplo: como un navegador web, un cliente de correo electrónico, un servidor de juegos, 
+Ejemplos de puertos comunes:
+Puerto 80: HTTP (Hypertext Transfer Protocol) html hipertexto, utilizado para la navegación web.
+Puerto 443: HTTPS (HTTP Secure), una versión encriptada de HTTP.
+Puerto 25: SMTP (Simple Mail Transfer Protocol), utilizado para enviar correos electrónicos.
+Puerto 21: FTP (File Transfer Protocol), utilizado para transferir archivos.
+
+html
+<h1>hola</h1> titulo grande
+
+ejemplo: 
+solicitud para bajar un archivo con ftp desde el server 142.251.133.78
+142.251.133.78:21
+
+
+Instalar Ansible:
+=================
+levanto una vm donde vamos a instalar ansible y desde allí ejecutar las tareas
+
+actualizo todos los paquetes 
+sudo apt update
+
+instalo ansible 
+sudo apt install ansible
+yes
+restart kernel
+
+compruebo su instalación
+sudo apt list --installed |grep ansible
+ansible –-version
+
+https://github.com/upszot/UTN-FRA_SO_Ansible.git
+Interpretar ejemplo1 
+inventory: define los hosts donde se van a ejecutar los módulos ansibles
+[testing]
+127.0.0.1 
+[desarrollo]
+no-existe.com
+[produccion]
+localhost ansible_connection=local 
+
+playbook: conjunto de tareas a realizar dentro de cada host 
+host donde ser van a ejecutar las siguientes tareas
+- hosts: 
+    - testing
+    - desarrollo
+    - produccion
+
+tareas a ejecutar para cada host
+  tasks:
+    - name: "Mensaje 1"
+      debug: //imprime info en la consola
+        msg: "Ejemplo de playbook - 01 "
+
+    - name: "Mensaje 2"
+      debug: //imprime
+        msg: 
+          - "Soy: {{ ansible_hostname }} "
+          - "Estoy en el grupo: {{ hostvars[inventory_hostname].group_names }}"
+		  
+como ejecutar el playbook		  
+ir a la carpeta /home/vagrant/UTN-FRA_SO_Ansible/ejemplo_01
+ejecutar, indica -i como se llama el inventory luego ejecuta playbook.yml
+ansible-playbook -i inventory playbook.yml
+
+
+Y vemos como las tareas se ejecutan y luego, podemos ver un resumen de las ejecuciones:
+●	OK va a ser para cuando se pudo conectar al servidor pero no hizo ningún cambio. 
+●	Changed va a ser para cuando se pudo conectar al servidor y además realizó algún cambio. 
+●	Unreachable si no se pudo conectar. 
+●	Failed si falló la ejecución de la tarea. 
+●	Skipped si no ejecuta la tarea porque no es necesario o no debe ejecutarla en ese servidor.
+●	Y luego están rescued e ignored, pero no las vamos a usar por el momento.
+
+
+
+Ejercicio 1:
+============
+Ejecutar un servidor Ansible Managmente Node AMN una lista de tareas en dos servidores Desarrollo.
+AMN tiene ip 192.168.56.2
+Desarrollo dos servers con ip: 192.168.56.3 y 192.168.56.4
+
+
+Copiar y pegar carpeta vagrant 1-equipo
+cambiar el nombre de la vm  y la ip
+vmAnsibleDev213 192.168.56.3  (Host Dev)
+
+Copiar y pegar carpeta vagrant 1_equipo_con_mas_discos
+cambiar el nombre de la vm  y la ip
+vmAnsibleManNode213  "192.168.56.2" (AMN)
+
+levantamos las dos vm e ingresamos a cada una con git
+vagrant up
+vagrant ssh
+
+verificar con el siguiente comando si cada vm tiene la ip indicada
+ip address show
+inet 192.168.56.2/ AMN 
+inet 192.168.56.3/ desarrollo 
+
+
+genero llave ssh en AMN
+ssh-keygen
+confirmar 
+
+se crean dos llaves, la pública y la privada en $HOME/.ssh/ id_rsa y id_rsa.pub
+copiar el contenido de la llave pública
+cat .ssh/id_rsa.pub
+
+esta clave la pego en el host vmAnsibleDev dentro del archivo
+esto me permite acceder desde AMN al host mediante SSH
+en $HOME/.ssh/authorized.keys
+
+pruebo conectarme desde AMN al host
+ssh vagrant@192.168.56.3
+
+Instalar Ansible en AMN, ver punto anterior Instalar Ansible:
+
+clonar el repositior de ansible para ejecutar los ejemplos
+git clone https://github.com/upszot/UTN-FRA_SO_Ansible.git
+
+
+situarse en UTN-FRA_SO_Ansible/ejemplo_02
+modificamos inventory, sacamos todos los host, solo dejamos la ip del host desarrollo
+[desarrollo]
+192.168.56.3
+
+ejecutar ansible en este carpeta
+ansible-playbook -i inventory playbook.yml
+este playbook actualiza los paquetes, instala y levanta apache en el host, también copia un archivo en /var/www/html/index.html
+
+comprobar si fue instalado
+ingresamos al host y ejecutamos, para verificar que fue instalados
+apach2 --version 
+verificamos que haya sido creado el archivo /var/www/html/index.html
+
+
+
+
+
+
+

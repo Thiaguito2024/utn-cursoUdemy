@@ -1,0 +1,59 @@
+-BETA-
+Se crea el repo en github agregando el readme
+git clone "repositorio"(TP_SO_I3_x)
+touch TP_SO_I3_x/datos.txt
+cd TP_SO-I3_x
+git init
+git add . 
+git commit -m "BETA"
+git push -u origin master
+Se agrega como colaboradores a gamma y alfa
+
+-GAMMA-
+git clone REPO
+cd TP_SO-I3_x
+git branch gamma (Asi puede crear la nueva rama)
+git cheackout gamma (Cambio de rama master a Barriento)
+nano datos.txt
+git add datos.txt
+git commit -m "GAMMA"
+git push origin gamma (Le paso a que rama quiero que haga el push)
+
+-ALFA-
+git clone REPO
+cd TP_SO-I3_x
+git branch gamma (Asi puede crear la nueva rama)
+git cheackout gamma (Cambio de rama master a gamma)
+nano datos.txt
+git add datos.txt
+git commit -m "ALFA"
+git push origin gamma (Le paso a que rama quiero que haga el push)
+
+-BETA-
+git clone "repositorio" -b gamma single--branch
+nano dato.txt (Agrego nombre,apellido,IP,hora)
+git branch beta
+touch single--branch/beta.txt
+nano beta.txt(Agrego nombre,apellido,IP,hora)
+cd single--branch
+git init
+git add .
+git commit -m "BETA"
+git push -u origin beta
+
+-ALFA-
+git pull 
+git branch -a
+git checkout beta
+nano beta.txt
+git add . 
+git commit -m "ALFA"
+git push origin Mey
+
+-BETA-
+git clone "repositorio" -b beta single--branch
+cd single--branch
+git checkout master
+git merge beta
+git push -u origin master
+

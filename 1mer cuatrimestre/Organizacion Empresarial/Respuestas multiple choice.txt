@@ -1,0 +1,44 @@
+Respuestas del multiple choice: 
+1) a. Definiciones establecidas por la dirección de una organización
+   Las políticas son guías generales que definen cómo deben tomarse decisiones en una organización. 
+   Son lineamientos amplios establecidos por la dirección.
+
+2) e. Todas son correctas 
+   En una Sociedad Anónima (S.A.), los socios son accionistas, la responsabilidad de estos 
+   está limitada al capital aportado, puede ser unipersonal y es posible mantener anonimat
+   respecto a la identidad de los accionistas.
+
+3) c. Su comportamiento frente al volumen de producción.  
+   Los costos fijos no cambian con el volumen de producción, mientras que los costos variables lo hacen. 
+   Clasificarlos en función de su comportamiento ante cambios en la producción es lo más relevante para la toma 
+   de decisiones.
+
+4) e. Algunas son correctas  
+   Las acciones en una Sociedad de Responsabilidad Limitada (SRL) no son libremente transferibles y 
+   la responsabilidad de los socios está limitada al capital suscripto. Sin embargo, 
+   no es correcto que el número de socios se limite a 20 ni que necesariamente exista fiscalización por un síndico.
+
+5) b. Preferencias claras, constantes y estables. 
+   En el enfoque racional de la toma de decisiones, se asume que los tomadores de decisiones tienen preferencias 
+   claras y estables, lo que facilita seleccionar la mejor opción de manera lógica y consistente.
+
+6) d. Se vende por debajo del costo para eliminar competencia y monopolizar el mercado.  
+   El dumping ocurre cuando una empresa vende productos por debajo de su costo de producción 
+   para eliminar competencia y ganar control del mercado, lo cual puede llevar a un monopolio.
+
+7) a. El Precio de Venta con el Costo Marginal 
+   En un mercado de competencia perfecta, el volumen óptimo de producción se determina cuando el precio de venta 
+   iguala el costo marginal, ya que en ese punto se maximiza la utilidad.
+
+8) c. Fusiona a las empresas participantes  
+   En un oligopolio tipo trust, las empresas participantes se fusionan para formar una única entidad, 
+   eliminando la competencia interna entre ellas.
+
+9) a. Aumenta la contribución marginal unitaria y disminuyen las unidades en el punto de equilibrio  
+   Si el precio de venta aumenta, la contribución marginal por unidad (precio menos costo variable) aumenta, lo que 
+   reduce la cantidad necesaria para alcanzar el punto de equilibrio, ya que se necesita vender menos unidades 
+   para cubrir los costos fijos.
+
+10) c. Todos los anteriores  
+   El presupuesto económico incluye todos los elementos relacionados con los ingresos y gastos, como amortizaciones
+ y comisiones de vendedores, ya que impactan directamente en la rentabilidad y operatividad de la empresa.

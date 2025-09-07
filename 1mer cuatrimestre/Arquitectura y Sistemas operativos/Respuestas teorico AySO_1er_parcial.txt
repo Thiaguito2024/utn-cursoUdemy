@@ -1,0 +1,59 @@
+1-cual de las siguentes es una funcion del Sistema Operativo? 
+-todas las anteriores
+2- Los sistemas operativos pueden divirse segun la gestion de procesos
+- Monotarea y multirarea
+3- La memoria Virtual es: 
+- Una parte del disco duro utilizada cuando las memorias cache...
+4-de cuantos bytes esta compuesta un megabayte?
+-las son son correctas 
+5- Al abrir un archivo. el sistema operativo toma en cuenta el usuario activo y la lista de parmismos asigando al archivo
+para determinar si se tiene acceso o no
+-Verdadero 
+6- La tarjeta madre es la placa de circuitos interados en la cual se isterta el procesador
+-Verdadero
+7-Cual es el significado de ram
+-Random Acces Memory
+8- Cual es el signfico de ROM? 
+- Read Only Memory
+9- El cpu tiene un reloj interno cuya velocidad se mide en "hertz" y determina la
+-Velocidad de procesamiento
+10-Los contenidos de la memoria RAM se pierden al apagar el ordenador
+-Verdadero
+11- que significa CLI?
+- Command Line Interface (Interfaz de Línea de Comandos)
+12- Los comandos distinguen entre mayustuclas y minutulas ?
+- Verdadero
+13- de las siguentes opciones ¿cual no es una manera correcta de cambiar las opciones?
+- -r-l
+14- que comando muestra tu ubicacion actual en el sistema operativo?
+- pwd
+15- que comando te permite cambiar de directorio?
+- cd
+16- El primer caracter en una lista larga (resultado de ls -l) indica
+- Permisos
+17- Que opcion al comando ls acomodara la salida por tamaño de archivos?
+- -S
+18- cual de las siguentes series tiene los permisos del propietario resaltados?
+- 1: rw-rw-r--
+20- cual de las siguentes series de parmisos indica que el otro propietario solo tiene permismo de lectura?
+- rw-rw-r--
+21- cual de las siguentes comandos se usa para cambiar el propietario de una archivo?
+- chown
+22- cambiar el usuario propietario de un archivo requiere acceso administratico?
+- Verdadero
+23- El comando mv requiere al menos dos argumentos
+- Verdadero 
+24- que comando se puede utilizar para copiar un archivo?
+- cp 
+25- cual de los siguentes comando de utiliza para filtrar texto?
+- grep
+26- cual de las siguentes lines no sera devuelta por el comando grep '[^0-9]'file.txt
+- 3121991
+27- cual de las siguentes comandos muestra todas los procesos ?
+- ps -e
+28- Los usuarios pueden actualizar su propia contraseña
+- Verdadero
+29- el usuario root puede cambiar la contraseña de cualquier usuario
+- Verdadero
+30- cual de las siguentes comandos borraro todos los archivos de un paquete?
+- apt-get-purge

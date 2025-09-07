@@ -1,0 +1,419 @@
+EJERCICIOS DE DDL:
+1) Crear una vista formada por los números de proveedores y números de
+productos situados en diferentes localidades.
+
+	CREATE VIEW V_NUM_PNRO_LOCALIDADES_DIFERENTES 
+		AS
+		SELECT PV.NUMERO, PR.PNRO
+		FROM proveedores PV, productos PR
+		WHERE PV.LOCALIDAD != PR.LOCALIDAD;
+
+2) Agregar la columna IMPORTADOR a la tabla PRODUCTOS.
+
+	ALTER TABLE productos ADD IMPORTADOR VARCHAR(30);
+
+3) Crear una vista formada por los registros de los proveedores que viven en Wilde.
+
+	CREATE VIEW V_PROVEEDORES_WILDE
+		AS
+		SELECT * FROM proveedores
+		WHERE LOCALIDAD  = ‘Wilde’;
+
+4) Crear las tablas DEPARTAMENTOS y EMPLEADOS con sus relaciones, y las
+tablas PACIENTES y MEDICAMENTOS con sus relaciones.
+
+	CREATE TABLE DEPARTAMENTOS
+		(NRODEPARTAMENTO INT NOT NULL,
+		NOMBRE VARCHAR(30) NOT NULL,
+		PRIMARY KEY (NRODEPARTAMENTO));
+
+	CREATE TABLE EMPLEADOS (
+  		LEGAJO INT NOT NULL,
+  		NOMBRE VARCHAR(20) NOT NULL,
+  		APELLIDO VARCHAR(20) NOT NULL,
+  		DIRECCION VARCHAR(30) NOT NULL,
+  		LOCALIDAD VARCHAR(20),
+  		FECHA_NACIMIENTO DATE NOT NULL,
+  		FECHA_INGRESO DATE NOT NULL,
+  		NRODEPARTAMENTO INT,
+		PRIMARY KEY (LEGAJO),
+		FOREIGN KEY (NRODEPARTAMENTO) REFERENCES departamentos (NRODEPARTAMENTO));
+
+	CREATE TABLE MEDICAMENTOS
+		(NROMEDICAMENTO INT NOT NULL,
+		NOMBRE VARCHAR(30) NOT NULL,
+		PRIMARY KEY (NROMEDICAMENTO));
+
+	CREATE TABLE PACIENTES
+		(DNI INT NOT NULL,
+		NOMBRE VARCHAR(20) NOT NULL,
+		APELLIDO VARCHAR(20) NOT NULL,
+		FECHA_NACIMIENTO DATE NOT NULL,
+		NROMEDICAMENTO INT NOT NULL,
+		PRIMARY KEY (DNI),
+		FOREIGN KEY (NROMEDICAMENTO) REFERENCES medicamentos (NROMEDICAMENTO));
+
+	*MEDICAMENTOS PACIENTES es una relacion de muchos a muchos, se necesita una tercer tabla
+
+
+EJERCICIOS DE DML:
+Realizar las siguientes proposiciones SQL con la siguiente estructura:
+
+	PROVEEDORES (NUMERO, NOMBRE, DOMICILIO, LOCALIDAD)
+	PRODUCTOS (PNRO, PNOMBRE, PRECIO, TAMAÑO, LOCALIDAD)
+	PROV-PROD (NUMERO, PNRO, CANTIDAD)
+
+1) Obtener los detalles completos de todos los productos.
+	
+	SELECT * FROM productos;
+
+2) Obtener los detalles completos de todos los proveedores de Capital.
+
+	SELECT * FROM proveedores 
+	WHERE LOCALIDAD = `Capital`;
+
+3) Obtener todos los envíos en los cuales la cantidad está entre 200 y 300 inclusive.
+
+	SELECT * FROM prov_prod WHERE CANTIDAD >= 200 AND CANTIDAD <= 300;
+
+4) Obtener los números de los productos suministrados por algún proveedor de
+Avellaneda.
+
+	SELECT PP.NUMERO FROM prov_prod PP 
+		WHERE PP.NUMERO = (
+			SELECT PV.NUMERO FROM proveedores PV
+				WHERE PV.LOCALIDAD = 'Avellaneda'
+				LIMIT 1 );  
+
+	*"por algun proveedor de Avellaneda" = "por proveedores de Avellaneda"
+
+5) Obtener la cantidad total del producto 001 enviado por el proveedor 103.
+
+	SELECT SUM(PP.CANTIDAD) FROM prov_prod PP WHERE PP.PNUM = 001 AND PP.NUMERO = 103;
+
+6) Obtener los números de los productos y localidades en los cuales la segunda letra
+del nombre de la localidad sea A.
+
+	SELECT PD.PNUM, PD.LOCALIDAD FROM productos PD WHERE PD.LOCALIDAD LIKE '_a%';
+
+	*falta OR PD>LOCALIDAD LIKE '_A%'
+
+7) Obtener los precios de los productos enviados por el proveedor 102.
+
+	SELECT PD.PRECIO FROM productos PD
+	WHERE PD.PNRO IN 
+		(SELECT PP.PNRO FROM prov_prod PP
+		WHERE PP.NUMERO = 102);
+
+8) Construir una lista de todas las localidades en las cuales esté situado por lo menos
+un proveedor o un producto.
+
+	SELECT PD.LOCALIDAD FROM productos PD
+	UNION
+	SELECT PV.LOCALIDAD FROM proveedores PV;
+
+9) Cambiar a “Chico” el tamaño de todos los productos medianos.
+
+	UPDATE productos
+	SET TAMAÑO = 'Chico'
+	WHERE TAMAÑO = 'mediano';
+
+10) Eliminar todos los productos para los cuales no haya envíos.
+	
+	DELETE FROM productos PD
+	WHERE PD.PNRO NOT IN (
+		SELECT PP.PNRO FROM prov_prod PP);
+
+11) Insertar un nuevo proveedor (107) en la tabla PROVEEDORES. El nombre y la
+localidad son Rosales y Wilde respectivamente; el domicilio no se conoce todavía.
+
+	INSERT INTO proveedores (NUMERO,NOMBRE,LOCALIDAD) VALUES (107,'Rosales','Wilde');
+
+
+2) Dadas las siguientes tablas:
+
+	CLIENTES (código_cliente, nombre, domicilio, provincia)
+	PRODUCTOS (código_producto, nombre_producto)
+	ITEM_VENTAS (número_factura, coódigo_producto, cantidad, precio)
+	VENTAS (número_factura, código_cliente, fecha)
+
+Resolver las siguientes consultas:
+
+1. Obtener la cantidad de unidades máxima.
+
+	SELECT MAX(cantidad) FROM item_ventas;
+
+2. Obtener la cantidad total de unidades vendidas del producto c.
+
+	SELECT SUM(cantidad) FROM item_ventas 
+	WHERE item_ventas.codigo_producto = 'c';
+
+3. Cantidad de unidades vendidas por producto, indicando la descripción del producto,
+ordenado de mayor a menor por las cantidades vendidas.
+
+	SELECT SUM(IV.cantidad) AS cantidades, PD.nombre_producto AS nombres
+	FROM item_ventas IV, productos PD
+	WHERE IV.codigo_producto = PD.codigo_producto
+	GROUP BY IV.codigo_producto
+	ORDER BY cantidades DESC; 
+
+4. Cantidad de unidades vendidas por producto, indicando la descripción del producto,
+ordenado alfabéticamente por nombre de producto para los productos que vendieron
+más de 30 unidades.
+
+	SELECT cantidades, productos
+	FROM(
+		SELECT SUM(IV.cantidad) as cantidades, PD.nombre_producto AS productos
+		FROM item_ventas IV, productos PD
+		WHERE IV.codigo_producto = PD.codigo_producto
+		GROUP BY IV.codigo_producto
+		ORDER BY productos ASC
+	) AS PC 
+	WHERE PC.cantidades >= 30;
+
+5. Obtener cuantas compras (1 factura = 1 compra) realizó cada cliente indicando el
+código y nombre del cliente ordenado de mayor a menor.
+
+	SELECT COUNT(VE.numero_factura) AS cantidad_compras, CL.nombre AS nombre_cliente
+	FROM ventas VE, clientes CL
+	WHERE VE.codigo_cliente = CL.codigo_cliente
+	GROUP BY VE.codigo_cliente
+	ORDER BY cantidad_compras DESC;
+
+6. Promedio de unidades vendidas por producto, indicando el código del producto
+para el cliente 1.
+(Mostrar el promedio de unidades vendidas y el codigo de producto para todas las compras del cliente 1)
+
+	SELECT IV.codigo_producto, AVG(IV.cantidad) as promedio
+	FROM item_ventas IV, ventas VE
+	WHERE IV.numero_factura = VE.numero_factura
+	AND VE.codigo_cliente = 1
+	GROUP BY codigo_producto;
+
+
+3) Se tiene la siguiente base de datos relacional:
+
+	Documentos (cod_documento, descripción)
+	Oficinas (cod_oficina, codigo_director, descripcion)
+	Empleados (cod_empleado, apellido, nombre, fecha_nacimiento, num_doc, cod_jefe,	cod_oficina, cod_documento)
+	Datos_contratos (cod_empleado, fecha_contrato, cuota, ventas)
+	Fabricantes (cod_fabricante, razón_social)
+	Listas (cod_lista, descripción, ganancia)
+	Productos (cod_producto, descripcion, precio, cantidad_stock, punto_reposición,	cod_fabricante)
+	Precios (cod_producto, cod_lista, precio)
+	Clientes (cod_cliente, cod_lista, razón_social)
+	Pedidos (cod_pedido, fecha_pedido, cod_empleado, cod_cliente)
+	Detalle_pedidos (cod_pedido, numero_linea, cod_producto, cantidad)
+	
+Resolver las siguientes consultas utilizando sentencias SQL:
+Consultas simples (una sola tabla)
+
+1. Obtener una lista con los nombres de las distintas oficinas de la empresa.
+	
+	SELECT OF.descripcion as nombre FROM Oficinas OF;
+
+2. Obtener una lista de todos los productos indicando descripción del producto, su precio de
+costo y su precio de costo IVA incluído (tomar el IVA como 21%).
+
+	SELECT PD.descripcion, PD.precio AS producto, precio*1.21 as precio_iva 
+	FROM productos PD;
+
+3. Obtener una lista indicando para cada empleado apellido, nombre, fecha de cumpleaños y edad.
+
+	SELECT EM.nombre, EM.apellido, Em.fecha_nacimiento, year(now()) - year(EM.fecha_nacimiento) 
+	AS edad FROM Empleados EM;
+
+4. Listar todos los empleados que tiene un jefe asignado.
+
+	SELECT * FROM Empleados EM 
+	WHERE EM.cod_jefe != null;
+
+5. Listar los empleados de nombre “María” ordenado por apellido.
+
+	SELECT * FROM Empleados EM 
+	WHERE EM.nombre = `María`
+	ORDER BY EM.apellido;
+
+6. Listar los clientes cuya razón social comience con “L” ordenado por código de cliente.
+
+	SELECT * FROM Clientes CL
+	WHERE CL.razon_social LIKE `L%`
+	ORDER BY CL.cod_cliente;
+
+7. Listar toda la información de los pedidos de Marzo ordenado por fecha de pedido.
+
+	SELECT * FROM Pedidos P
+	WHERE month(P.fecha_pedido) = 3
+	ORDER BY P.fecha_pedido;
+
+8. Listar las oficinas que no tienen asignado director.
+
+	SELECT * FROM Oficinas
+	WHERE cod_director = NULL;
+
+9. Listar los 4 productos de menor precio de costo.
+
+	SELECT * FROM Productos P
+	ORDER BY P.precio ASC
+	LIMIT 4;
+
+10. Listar los códigos de empleados de los tres que tengan la mayor cuota.
+
+	SELECT C.cod_empleado, C.cuota FROM Datos_contrator
+	ORDER BY C.cuota DESC
+	LIMIT 3;
+
+--Consultas multitablas--
+
+1. De cada producto listar descripción, razón social del fabricante y stock ordenado por razón
+social y descripción.
+
+	SELECT P.descrpcion, F.razon_social, P.cantidad_stock
+	FROM Productos P, Fabricantes F
+	ORDER BY F.razon_social, P.descripcion;
+
+2. De cada pedido listar código de pedido, fecha de pedido, apellido del empleado y razón
+social del cliente.
+
+	SELECT P.cod_pedido, P.fecha_pedido, E.apellido, C.razon_social
+	FROM Pedidos P, Empleados E, Clientes C
+	WHERE P.cod_empleado = E.cod_empleado
+	AND P.cod_cliente = C.cod_cliente;
+
+3. Listar por cada empleado apellido, cuota asignada, oficina a la que pertenece ordenado en
+forma descendente por cuota.
+
+	SELECT E.apellido, D.cuota, O.descripcion
+	FROM Empleados E, Datos_contratos D, Oficinas O
+	WHERE E.cod_empleado = D.cod_empleado
+	AND E.cod_oficina = O.cod_oficina
+	ORDER BY D.cuota DESC;
+
+4. Listar sin repetir la razón social de todos aquellos clientes que hicieron pedidos en Abril.
+
+	SELECT DISTINCT C.razon_social
+	FROM Clientes C, Pedidos P
+	WHERE month(P.fecha_pedido) = 4
+	AND P.cod_cliente = C.cod_cliente;
+
+5. Listar sin repetir los productos que fueron pedidos en Marzo.
+
+	SELECT DISTINCT PR.descripcion, PE.fecha_pedido
+	FROM Productos PR, Pedidos PE, Detalle_pedidos D
+	WHERE PR.cod_producto = D.cod_producto
+	AND D.cod_pedido = PE.cod_pedido
+	AND month(PE.fecha_pedido) = 3;
+
+6. Listar aquellos empleados que están contratados por más de 10 años ordenado por
+cantidad de años en forma descendente.
+
+	SELECT E.nombre, E.apellido, (year(now()) - year(D.fecha_contrato)) AS antiguedad
+	FROM Empleados E, Datos_contratos D
+	WHERE E.cod_empleado = D.cod_empleado
+	AND (year(now()) - year(D.fecha_contrato)) > 10
+	ORDER BY D.fecha_contrato ASC;
+
+7. Obtener una lista de los clientes mayoristas ordenada por razón social.
+	
+	SELECT C.* FROM Clientes C, Listas L
+	WHERE C.cod_lista = L.cod_lista
+	AND L.descripcion = `Mayoristas`
+	ORDER BY C.razon_social;
+
+8. Obtener una lista sin repetir que indique qué productos compró cada cliente, ordenada
+por razón social y descripción.
+
+	SELECT DISTINCT PR.descripcion C.razon_social
+	FROM Clientes C, Productos PR, Pedidos PE, Detalle_pedidos D
+	WHERE D.cod_pedido = PE.cod_pedido
+	AND PR.cod_prod = D.cod_prod
+	AND PE.cod_cliente = C.cod_cliente
+	ORDER BY C.razon_social, PR.descrpcion;
+
+9. Obtener una lista con la descripción de aquellos productos cuyo stock está por debajo del
+punto de reposición indicando cantidad a comprar y razón social del fabricante ordenada
+por razón social y descripción.
+
+	SELECT P.punto_reposicion AS cantidad_a_comprar, P.descrpcion, F.razon_social
+	FROM Productos P, Fabricantes F
+	WHERE P.cod_fabricante = F.cod_fabricante
+	AND P.cantidad_stock < P.punto_reposicion
+	ORDER BY F.razon_social, P.descripcion;
+
+10. Listar aquellos empleados cuya cuota es menor a 50000 o mayor a 100000.
+
+	SELECT E.nombre, E.apellido, D.cuota
+	FROM Empleados E, Datos_contratos D
+	WHERE E.cod_empleado = D.cod_empleado
+	AND D.cuota < 50000 OR D.cuota > 100000;
+
+INTEGRIDAD
+
+1) Una base de datos hospitalaria contiene las siguientes relaciones:
+
+	PACIENTES (CODIGO-PAC, APELLIDO-PAC, EDAD)
+	MEDICAMENTOS (CODIGO-MED, PRECIO-UNITARIO)
+	GASTOS (CODIGO-PAC, CODIGO-MED)
+
+Indicar las claves primarias y claves ajenas de cada relación.
+	
+	PACIENTES.CODIGO_PAC es PK
+	MEDICAMENTOS.CODIGO_MED es PK
+	GASTOS.CODIGO_PAC, GASTOS.CODIGO_MED son FK refieren PACIENTES, MEDICAMENTOS
+
+
+
+2) Dadas las siguientes relaciones:
+
+	CURSOS (NUMCURSO, TITULO)
+	OFRECIMIENTOS (NUMCURSO, NUMOFR, FECHA, AULA)
+	PROFESORES (NUMCURSO, NUMOFR, NUMEMP)
+	ESTUDIANTES (NUMCURSO, NUMOFR, NUMEMP, CALIFICACION)
+	EMPLEADOS (NUMEMP, EMPLE-NOMBRE, PUESTO)
+
+Indicar las claves primarias y claves ajenas de cada relación.
+
+	
+	CURSOS.NUMCURSO es PK
+	OFRECIMIENTOS.NUMCURSO es FK refiere a CURSOS
+	OFRECIMIENTOS.NUMOFR es PK
+	PROFESORES.NUMCURSO, PROFESORES.NUMOFR, PROFESORES.NUMEMP son FK refieren CURSOS, OFRECIMIENTOS, EMPLEADOS
+	ESTUDIANTES.NUMCURSO, ESTUDIANTES.NUMOFR, ESTUDIANTES.NUMEMP son FK refieren CURSOS, OFRECIMIENTOS, EMPLEADOS
+	EMPLEADOS.NUMEMP es PK
+
+
+3) Dadas las siguientes tablas:
+
+	Empleados (cod_emp, nombre, apellido, tipo_doc, num_doc, categoria, cod_ofic)
+	Oficinas (cod_ofic, descripción)
+
+Crear las siguientes reglas de integridad:
+
+	La columna cod_emp debe ser clave primaria.
+	La columna cod_emp debe tener valores entre 100 y 1000.
+	Las columnas tipo_doc y num_doc deben contener valores no repetidos (únicos).
+	La columna Categoria debe contener algunos de los siguientes valores: Senior, Semi Senior, Junior.
+	La columna cod_ofic debe tener valores que existan en la tabla Oficinas.
+
+	ALTER TABLE Empleados
+	ADD (
+		CONSTRAINT s_emp_pk PRIMARY KEY(cod_emp),
+		CONSTRAINT s_emp_chk_cod CHECK(cod_emp >= 100 AND cod_emp <= 1000),
+		CONSTRAINT s_emp_unq_dni UNIQUE(tipo_doc, num_doc),
+		CONSTRAINT s_emp_chk_cat CHECK(categoria='Senior' OR categoria='Semi Senior' OR categoria='Junior'),
+		CONSTRAINT s_emp_fk_ofi FOREIGN KEY(cod_ofic) REFERENCES oficinas(cod_ofic)
+	);
+
+
+
+
+
+
+
+
+
+
+
+
+
+

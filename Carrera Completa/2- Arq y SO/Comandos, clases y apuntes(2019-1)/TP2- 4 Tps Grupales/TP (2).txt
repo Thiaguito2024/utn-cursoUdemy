@@ -1,0 +1,51 @@
+-BETA-
+Se crea el repo en github agregando el readme
+git clone LINKREPO
+cd CARPETA TP
+cat >> fork.txt - ctr z
+git init
+git add . 
+git commit -m "ALFA"
+git push -u origin master
+
+-GAMMA-
+Fork en el github de beta
+git clone LINKREPO
+cd CARPETA TP
+ipconfig (anotar ip)
+cat >> fork.txt - ctr z
+git init
+git add . 
+git commit -m "GAMMA"
+git push -u origin master
+
+-ALFA-
+Fork en el github de beta
+git clone LINKREPO
+cd CARPETA TP
+ipconfig (anotar ip)
+cat >> fork.txt - ctr z
+git init
+git add . 
+git commit -m "ALFA"
+git push -u origin master
+
+-BETA-
+git clone LINKREPO
+cd CARPETA TP
+cat >> NuevoDato.txt - ctr z
+git init
+git add . 
+git commit -m "BETA"
+git push -u origin master
+
+-GAMMA y ALFA-
+git remote add X LINK REPO
+git fetch X
+git rebase
+
+
+1- git remote add x (hhtp repositorio del que se forkea)
+2- Si, si se especifica de donde se Forkea
+3- Si, si se especifica de donde se Forkea
+4- No se pierden

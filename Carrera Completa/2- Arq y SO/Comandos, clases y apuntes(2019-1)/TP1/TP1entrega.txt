@@ -1,0 +1,10 @@
+Entrega en clase, pasos
+(El exportar/importar la virtualizacion no suele funciona, es mejor traer las carpetas que se encuentran en click derecho en la maquina-> mostrar en el explorador en un pendrive y comerse el garron. la maquina tiene que estar en adaptador puente, no nat. La ip se puede obtener con comando ip a)
+
+#iniciar lampp
+sudo /opt/lampp/lampp start
+#editar el txt config para poner tu ip y la del compa como segura 
+sudo nano /opt/lampp/htdocs/owncloud/config/config.php
+#dentro del nano, en la parte de =>"" agregar tu y su ip y guardar cambios
+
+#entrar en IPDELCOMPA/owncloud e ingresar el usuario y contraseña del compa, si esta todo bien deberias poder entrar y pasar la imagen

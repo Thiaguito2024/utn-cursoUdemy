@@ -1,0 +1,23 @@
+Ejemplo para crear directorio encatenando**, sin crear una por una
+(Se puede omitir el primer comando como se muestra en el siguiente, era solo para mostrar el concatamiento)
+mkdir -p Datos & mkdir -p  Datos/{Datos1,Datos2,Datos3}/Datos_Generales
+
+Se pueden crear varios archivos con nombres repetidos en todas las carpetas de forma rapida
+mkdir -p  Datosis/{Datos1,Datos2,Datos3}/{Datos_Generales,Informacion}
+
+Se pueden realizar varios archivos o carpetas con variaciones en los nombres
+mkdir -p DatosVarios/Dato{D,G,F}/
+
+Ejericio en clase 
+mkdir -p  Parcial/{Alumnos,Plantillas}/Parciales & mkdir -p Parcial/Alumnos/TP/1C & mkdir -p Parcial/Plantillas/Finales/{1,2}C
+
+
+**encatenado
+
+; separa los comandos, no importa si el primero da error
+
+& ejecuta los comandos de manera simultanea
+&& si el primero da error, el segundo no se ejecuta (and, 00 11)
+
+| salida del primero sea la entrada del segundo
+|| el segundo comando se ejecutara si el primero da error (or, 01 10)

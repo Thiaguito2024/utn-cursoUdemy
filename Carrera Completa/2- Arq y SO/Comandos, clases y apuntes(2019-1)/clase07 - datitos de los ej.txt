@@ -1,0 +1,17 @@
+ls 
+	-d directorios sin entrar
+	-r orden inverso
+	-a muestra ocultos
+	-i num inodo
+
+	-R entra subd recur
+
+	/etc/t* empiecen con
+	/etc/t?? empiecen con y tengan x caracteres
+	/etc/t[1-4] "" y termine con 1, 2, 3 o 4
+	/etc/t*y "" y terminen con y
+
+mkdir 
+	-p forzar padres igual
+
+en el mv con . se ocultan

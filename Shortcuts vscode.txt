@@ -1,0 +1,10 @@
+Ctrl+Shift+P = paleta de comandos
+Ctrl + o = abre archivo 
+Ctrl + f = para buscar palabras
+Ctrl + h = para reemplazar
+Ctrl + w = cierra archivos o pestañas
+Ctrl + } = comenta y descomenta la linea de codigo
+Ctrl + g = para ir a una linea y/o columna especifica
+Shift + alt + flecha arriba o abajo = copia la linea de codigo
+alt + felcha arriba o abajo = muevo la linea para donde quiero
+alt + clip = creo "dos" cursores para poder escribir en dos lineas de codigo al mismo tiempo

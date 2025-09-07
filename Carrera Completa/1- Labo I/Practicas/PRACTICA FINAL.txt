@@ -1,0 +1,184 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include "input.h"
+#include "functions.h"
+
+typedef struct
+{
+    int dia;
+    int mes;
+    int anio;
+} eFecha;
+
+typedef struct
+{
+    int legajo;
+    char* nombre;
+    char* apellido;
+    char sexo;
+    eFecha fechaIngreso;
+} eEmpleado;
+
+
+int main(void)
+{
+
+    /*
+
+    eEmpleado* plantel;
+    eEmpleado aux;
+
+    for( int i = 0; i < 9 ; i++)
+    {
+        for( int j = i+1; j< 10; j++)
+        {
+            if( ((plantel+i)->sexo) > ((plantel+j)->sexo) )
+            {
+                aux = (plantel+i);
+                (plantel+i) = (plantel+j);
+                (plantel+j) = aux;
+            }
+            else
+            {
+                if( ((plantel+i)->sexo) = ((plantel+j)->sexo) )
+                {
+                    if( strcmp( ((plantel+i)->apellido) , ((plantel+j)->apellido) > 0 )   )
+                    {
+                        aux = (plantel+i);
+                        (plantel+i) = (plantel+j);
+                        (plantel+j) = aux;
+                    }
+                }
+            }
+        }
+    }
+
+    */
+
+
+    //-----------------------------------------------------------------------------------//
+
+
+    /*
+
+    eEmpleado* empleado;
+    eEmpleado* empleado2;
+
+    empleado = (eEmpleado*) malloc( sizeof(eEmpleado) );
+    empleado->nombre = (char*) malloc(sizeof(char)*20);
+    empleado->apellido = (char*) malloc(sizeof(char)*20);
+
+    empleado2 = (eEmpleado*) malloc( sizeof(eEmpleado) );
+    empleado2->nombre = (char*) malloc(sizeof(char)*20);
+    empleado2->apellido = (char*) malloc(sizeof(char)*20);
+
+    empleado->sexo = 'M';
+    empleado->legajo = 10;
+    empleado->fechaIngreso.anio=2018;
+    empleado->fechaIngreso.mes=10;
+    empleado->fechaIngreso.dia=1;
+
+    strcpy(empleado->nombre, "Elias");
+    strcpy(empleado->apellido, "Alvarez");
+
+
+    printf("%s\n%s\n%c\n%d\n\n", empleado->nombre, empleado->apellido, empleado->sexo, empleado->legajo);
+
+
+    FILE* fpointer;
+    int cant;
+    fpointer = fopen("BINARY.bin", "wb");
+
+    cant = fwrite(empleado, sizeof(eEmpleado), 1, fpointer);
+
+    fclose(fpointer);
+
+    fpointer = fopen("BINARY.bin", "rb");
+
+    cant = fread(empleado2, sizeof(eEmpleado), 1, fpointer);
+
+
+    printf("%s\n%s\n%c\n%d\n\n", empleado2->nombre, empleado2->apellido, empleado2->sexo, empleado2->legajo);
+
+
+
+    //----------------------------
+    free(empleado->nombre);
+    free(empleado->apellido);
+    free(empleado);
+
+    free(fpointer);
+
+
+    */
+
+
+    //-----------------------------------------------------------------------------------//
+
+
+    /*
+
+    FILE *f_pointer;
+    char text[100];
+    //f_pointer = fopen("Practica texto.txt", "w");
+
+    //fprintf(f_pointer, "Esto es una practica de escritura");
+
+    f_pointer = fopen("Practica texto.txt", "r");
+
+    fscanf(f_pointer, "%[^\n]", text);
+
+    printf("%s", text);
+
+    free(f_pointer);
+    */
+
+
+    //-----------------------------------------------------------------------------------//
+
+
+    /*
+    char nombres[5][20];
+    char nombre_aux[20];
+
+    strcpy(nombres[0],"a");
+    strcpy(nombres[1],"c");
+    strcpy(nombres[2],"g");
+    strcpy(nombres[3],"e");
+    strcpy(nombres[4],"b");
+
+    for (int i=0; i<4; i++)
+    {
+        for (int j=i+1; j<5; j++)
+        {
+            if( (strcmp(nombres[i], nombres[j]) > 0) )
+            {
+                strcpy(nombre_aux,nombres[i]);
+                strcpy(nombres[i],nombres[j]);
+                strcpy(nombres[j], nombre_aux);
+            }
+        }
+    }
+
+    for (int i=0; i<5; i++)
+    {
+        printf("%s\n", nombres[i]);
+    }
+    */
+
+    //-----------------------------------------------------------------------------------//
+
+
+    int num = 50, i;
+    for(i=1; i<=num; i++)
+    {
+        if( num % i)
+        {
+            continue;
+        }
+        printf("%d\n", i);
+    }
+    return 0;
+}//PROGRAM END

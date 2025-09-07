@@ -1,0 +1,24 @@
+  150  cal #hace un calendario precioso
+  151  w #muestra los usuarios y los proceso realizados
+  152  whoami #muestra quein soy, usuario
+  153  uname # sistema operativo
+  154  uname -n #usuario
+  155  uname -a #toda la info
+  156  uname -o #sistema operativo
+  157  uname -s #kernel
+  158  uname -version #licensia 
+  159* man un
+  160  uname --version #licensia 
+
+    1  finger #da informacion sobre login
+    2  hostname -i #IP de la maquina
+    3  domainname #nombre del servidor
+    4  dnsdomainname #nombre del dns
+    5  uptime #hora, tiempo y usuario que la maquina esta prendida
+    6  uptime -s #hora desde
+    7  uptime -p #tiempo desde
+    8  date #fecha
+    9  date -u #fecha global
+
+    1  last reboot #registro de prendido de la maquina c/hora
+    2  finger #user, nombre, terminal, status

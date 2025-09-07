@@ -1,0 +1,218 @@
+DEFINICION DE UN SISTEMA DE BASES DE DATOS: es computarizado, mantiene la informacion centralizada y disponible a solicitudes
+
+ASPECTOS IMPORTANTES:
+Datos independientes de los programas que interactuan con ellos, los cambios en DB no deben resultar en cambios en los programas.
+Posibilidad de explorar la DB sin necesidad de usar lenguajes de programacion, sino lenguajes de consultas
+
+COMPONENTES:
+-INFO: 
+=INTEGRADA (unificacion de varios archivos de datos sin redundancia) 
+=COMPARTIDA (los elementos individuales de info pueden compartirse entre varios usuarios distintos)
+
+-EQUIPOS: hardware que se utiliza como servidores
+
+-PROGRAMAS: 
+=DE APLICACION: permiten interaccion entre usuarios y db
+=DE ADMINISTRACION: maneja solicitudes de acceso a la db y procesa las consultas
+
+-USUARIOS
+=ADMINISTRADOR DE DB: toma las decisiones estrategicas y de politicas referidas a la info de la empresa. Se encarga del control gneral del sistema a nivl tecnico
+.define el esquema conceptual e interno
+.vincula los usuarios
+.define verificaciones de seguridad e integridad
+.hace los respaldos
+.supervisa el desempenio y responde a cambios en requerimientos
+
+=ANALISTA DE SISTEMAS: determinan los requerimientos de los usuarios finales 
+
+=PROGRAMADOR DE APPS: escriben los programas que utilizan la db
+
+=USUARIOS FINALES: usan las apps para interactuar con el sistema, necesitan acceso a la db y la consultan, actualizan, generan informes, etc
+
+CARACTERISTICAS: está constituida por un conjunto de datos persistentes, disponibles para muchos usuarios, los cuales pueden acceder en forma simultanea
+
+=INDEPENDENCIA DE DATOS RESPECTO A LOS SISTEMAS: las modificaciones en la DB no deben incidir en la codificacion de los programas
+
+=POSIBILIDAD DE DISMINUIR LA REDUNDANCIA:ahorra espacio y mantiene mejor los datos
+
+=NATURALEZA AUTODESCRIPTIVA DE LOS SISTEMAS DE LAS DB: contiene una definicion completa con info de estructuras tipo y formato de almacenamiento junto con sus restricciones 
+
+=MANEJO DE MULTIPLES VISTAS DE LOS DATOS: puede ser vista por varios usuarios en diferentes momentos y de diferentes maneras, ven solo lo que necesitan
+
+=POSIBILIDAD DE COMPARTIR LOS DATOS: disponible para varios usuarios y por distintas vias de acceso
+
+=COMPACTO, RAPIDO Y ACTUAL: se dispone de la info actualizada en cualquier moemnto
+
+=POSIBILIDAD DE APLICAR RESTRICCIONES DE SEGURIDAD: con palabras claves, vistas parciales, permisos de accesos ante consultas o modificaciones
+
+=AUDITORIA: facilitan obtener estados de la db, accesos realizados y registros borrados
+
+=RECUPERO: posibilidad de backup ante problemas, este se actualiza y se guarda
+
+=RELACIONABILIDAD: gracias a ella se pueden usar o explorar los datos de manera flexible con diferentes caminos de acceso
+
+DB RELACIONAL: se percibe por usuarios como conjunto de tablas, disenio de tabla de doble entrada
+-no hay dos columnas con los mismos datos
+-homogeneas por columna (misma clase, un solo varol en cada interseccion fila-columna)
+-columnas con nombres unicos
+-no se permiten filas duplicadas
+-las tablas tienen pk unica, simple o compuesta
+-las filas y columnas no estan ordenadas, estan en cualquier secuencia y momento
+
+DEFINICIONES BASICAS:
+-FILA: tupla, registro de datos
+-COLUMNA: atributo, item de datos
+-GRADO DE RELACION: cantidad de columnas en una talba
+-CARDINALIDAD: cantidad de filase n una tabla
+-DOMINIO: conjunto de valores atomicos, especifica un tipo de datos al cual pertenecen los valores que conforman el dominio.
+
+TIPOS DE RELACIONES: 
+-RELACIONES BASE/REALES: tienen nombre, son tablas o entidades
+-VISTAS(relaciones virtuales): tiene nombre, no tiene datos propios almacenados sino que se define en terminos de otras relaciones.
+-SNAPSHOTS: tiene nombre pero ademsa de definirse en terminos de otras, tiene datos propios almacenados
+-RESULTADOS DE CONSULTAS: pueden o no tener nombre, no tienen existencia persistente
+-TEPORALES: tiene nombre y se destruye. por ej al terminar una sesion activa
+
+TRANSACCIONES: unidad logica de trabajo, secuencia de instrucciones de consulta y actualizaciones.
+Entra en estado activo despues de iniciar su ejecucion (al ejecutar una instruccion sql)
+Cuando termina, pasa al estado parcialmente confirmado
+-Commit: compromete la transaccion actual, permanentemente
+-Rollback: retroceso de la transaccion actual, puede usarse hasta el último commit
+
+
+CATALOGO DE SISTEMA: conjunto de vistas que muestran los metadatos(datos que describen los atributos de los objetos de un sistema)
+Proporciona info a los usuarios y al DBA: 
+•Descripciones de los nombres de las relaciones
+•Nombres de los atributos, dominios, claves
+•Descripciones de nivel externo de las vistas y de nivel interno de las estructuras de almacenamiento e indices
+•Normas de seguridad y autorizacion ante el acceso de usuarios a relaciones y vistas bajo un orden determinado
+•El número y nombre de las tablas y vistas de una base de datos.
+•El número de columnas de una tabla o vista, junto con el nombre, el tipo de datos, la escala y la precisión de cada columna.
+•Las restricciones definidas en una tabla
+•Los índices y las claves definidas para una tabla.
+
+DDL: Define los datos que se manejan dentro de la base. 
+DML: Permite manipular los datos encontrados en la base de datos para realizar consultas a la misma ya sea agregar información, verla, modificarla, eliminarla, etc.
+
+REGLAS DE INTEGRIDAD RELACIONAL: evitan inconsistencias en los datos a la hora de modificar la db (ej danios accidentales)
+ La definición de constraints garantiza:
+•Permitir o no valores nulos en las columnas
+•Valores únicos para las columnas
+•Un valor primario identificando cada una de las filas en una tabla
+•Existencia de valores referenciales para cada columna que se lo indique.
+•Garantizar que las columnas cumplan reglas de negocio.
+
+VENTAJAS:
+•Mejoramiento de la eficiencia.
+•Centralización de reglas.
+•Fácilmente modificables.
+•Flexibilidad (Enable/Disable)
+•Documentación completa en el diccionario de datos
+
+TIPO DE ORGANIZACION DE DATOS, TIPOS DE ORGANIZACION DE DATOS
+-------------------------------------------------------------------------------------------------
+MODELO JERARQUICO: ya que no necesitamos todos los datos del registro al mismo tiempo, se particiona en jerarquias. permite optimizar.
+relacion padre-hijos.  
+
+-PROPIEDADES:
+=RAIZ: sin padre
+=HOJA: sin hijos
+
+ARBOLES LOGICOS: relaciones que existen entre los TIPOS de registros. se producen a traves de punteros para evitar la redundancia de hijos logicos.
+permite tener distintas visiones a traves de su nexo logico
+
+ARBOLES FISICOS: conjunto de punteros y relaciones entre ENTRADAS en los indices
+pueden existir datos de interseccion en una relacion
+
+-DESCRIPCION DE DATOS: el administrador debe hacer:
+=DESCRIPCION LOGICA GLOBAL DE LOS DATOS (ESQUEMA)
+=VISTAS PARCIALES (SUBESQUEMA) para cada programador
+=A VECES USAR DDL: describir tipos de relaciones o caractersiticas que el programador no describe, puede ser una ampliacion de un lenguaje de programacion o un recurso del sistema de administracion.
+
+-TIPOS DE DESCRIPCION/BLOQUES DE CONTROL:
+=DESCRIPCION DE LA BASE DE DATOS(DBD): descripción general de la db; características físicas como métodos de acceso, disenio de segmentos, detalles de los campos, longitud de bloques, aspectos de seguridad y control de acceso, etc.
+=BLOQUE DE ESPECIFICACION DE PROGRAMA(PSB): estructura lógica de datos a procesar respondiendo a un bloque DBD (visión del programador). agrega la especificación del tipo de procesamiento autorizado (lectura, borrado, actualización, etc)
+.FORMADO: por uno o más BLOQUES DE COMUNICACION DE PROGRAMA(PCB): descripción parcial de la DB, especifica para cada segmento qué tipo de operaciones puede hacer el programa sobre él.
+
+-SENSIBILIDAD: conjunto de segmetnos que utiliza el programa.
+
+LENGUAJE DE MANIPULEO DE DATOS(DML): interfase entre el programa de aplicación y la db.
+-ANFITRION:  lenguaje de registro por registro en el cual se realizan las operaciones. es LIFO
+
+PANORAMA DEL SISTEMA DE BASES DE DATOS JERARQUICAS (Information Management System): se usa para la toma de decisiones, coordinacion, control, analisis y visualizacion de informacion
+Busca 
+-Arquitectura básica: 
+=DB UNICA: todas las entidades que participan usan una sola base de datos y el mismo sistema para guardar toda la informacion. es poco practico porque puede haber variaciones en los tipos de datos y requerimientos de seguridad entre los distintos tipos de entidades
+=SISTEMA CENTRALIZADO: las entidades que participan copian una parte o toda su información en un repositorio central. generalmente lo gestiona una organizacion independiente o ente regularizador
+=SISTEMA FEDERADO: entidades independientes mantienen el control de su informacion y permite que los grupos que lo necesiten accedan a parte o toda su información mediante una aplicación que actua de interfáz. es el más facil de mantener aunque la seguridad puede ser un obstáculo a la hora de recoger información (desacuerdos en lo especificado)
+
+
+ARQUITECTURA 2:
+
+    Nivel interno: Tiene un esquema interno que describe la estructura física de almacenamiento de base de datos. Emplea un modelo físico de datos y los únicos datos que existen están realmente en este nivel.
+    Nivel conceptual: tiene esquema conceptual. Describe la estructura de toda la base de datos para una comunidad de usuarios. Oculta los detalles físicos de almacenamiento y trabaja con elementos lógicos como entidades, atributos y relaciones.
+    Nivel externo o de vistas: tiene varios esquemas externos o vistas de usuario. Cada esquema describe la visión que tiene de la base de datos a un grupo de usuarios, ocultando el resto.
+----------------------------------------------------------------------------------------------------
+MODELO PLEX/MODELO DE RED: un hijo con muchos padres.
+
+REGISTROS: grupo de valores de datos relacionados entre si, pueden ser complejos gracias al modelo de red
+
+ESTRUCTURA PLEX SIMPLE: no hay correspondencia compleja en ambos sentidos (ej un pais muchas provincias)
+ESTRUCTURA PLEX COMPLEJA: se corresponden en ambos sentidos (ej un articulo en muchas ordenes de compra, una orden de compra con muchos articulos)
+-El lenguaje de descripcion de datos propuesto por CODASYL no sirve para describirlas, por ende se transforman en simples:
+=Separamos en articulos y ordenes de compras.
+
+ORGANIZACION FISICA:
+-PUNTEROS HIJOS MULTIPLES: se incluyen listas de punteros en los registros, son dificiles de manejar cuando se insertan y eliminan frecuentemente. se evita el uso de este metodo
+-PUNTEROS HIJOS Y MELLIZOS: dos punteros por registro y uno para los de ultimo nivel. el problema está en la formación de largas cadenas de punteros cuando hay muchos mellizos
+
+EL CONJUNTO SET: es un anillo, tiene un registro principal OWNER y MEMBERS
+-PUEDE DEFINIR RELACIONES LOGICAS ENTRE REGISTROS: no puede estar vacio en su totalidad, se considera VACIO cuando solo tiene el registro owner
+-HAY DEPENDENCIA entre el owner y los members, los ultimos pueden cojnectarse bajo un criterio de ordenamiento definido
+-SE REPRESENTA con una flecha.
+
+-REGLAS:
+=TODO REGISTRO PUEDE SER MIEMBRO DE VARIOS SETS DISTINTOS
+=TODO REGISTRO PUEDE SER PROPIETARIO DE VARIOS SETS DISTINTOS
+=TODO REGISTRO PUEDE SER A LA VEZ MIEMBRO EN UNO/VARIOS SETS Y PROPIETARIO EN UNO/VARIOS SETS
+=UN SET PUEDE TENER UN TIPO DE REGISTRO COMO PROPIETARIO Y VARIOS COMO MIEMBROS
+=DOS TIPOS DE REGISTROS PUEDEN CONECTARSE ENTRE ELLOS POR UN NUMERO CUALQUIERA DE SETS DIFERENTES
+=PUEDE EXISTIR UN REGISTRO EN LA BASE SIN PARTICIPAR EN NINGUN SET
+=UN REGISTRO PUEDE SER MIEMBRO OPCIONAL: flecha que no llega, la participacion se establece o se suprime dinamicamente desde el programa
+
+-IMPLANTACION: se realiza por encadenamiento entre la ocurrencia del propietario y las diferentes ocurrencias de los miembros, las de estos se relacionan unas con otras por apuntadores "hacia el siguiente"
+=el usuario puede indicar si quiere que tambien apunten "hacia el que precede" para que la cadena pueda ser recorrida a la inversa.
+=tambien puede especificar que cada ocurrencia del miembro apunte hacia el propietario directaemnte para no tener que continuar la cadena para llegar a él
+
+-OPCIONES DE RELACIONES:
+=HACIA EL QUE SIGUE
+=HACIA EL QUE SIGUE Y EL QUE PRECEDE
+=HACIA EL QUE SIGUE Y EL PROPIETARIO
+=HACIA EL QUE SIGUE, EL QUE PRECEDE Y EL PROPIETARIO
+
+-NIVEL DE ORDENAMIENTO DEL SET:
+=Pueden usarse varias opciones para ordenar las diferentes ocurrencias de un miembro en un set
+.El orden logico de ellas es independiente de su localizacion fisica en la db
+.La nueva ocurrencia se posicionara en la cadena según lo indicado, pero siempre será la priemra en la cadena de ocurrencias.
+.Ordenamiento en base a un atributo del miembro asc o desc.
+
+-DEFINICION DE DATOS: ya diseniado el esquema de db de red, usando DDL DE RED se declaran:
+=Tipos de registros, de conjuntos
+=Definiciones de elementos de informacion
+=Restricciones del esquema usando..
+
+LENGUAJE DE MANIPULACION DE DATOS EN RED (DML DE RED): ordenes de registro por registro incorporadas en el lenguaje anfitrion 
+-A travez de una interfaz común se enlazan el sistema de base de datos y el lenguaje dep rogramacion anfitrion (son softwares distintos)
+-IDENTIFICAR REGISTROS ESPECIFICOS DEL A BASE DE DATOS COMO REGISTROS ACTUALES (porque son registro por registro)
+se usan...
+-INDICADORES DE ACTUALIDAD: llevan el control de varios registros y ocurrencias de conjunto
+-TIPOS:
+=ACTUAL DE TIPO REGISTRO: por cada tipo de registros se encuentra al ultimo accedido, si no se leyo ninguno de ese tipo se considera no definido.
+=ACTUAL DE TIPO CONJUNTOS: por cada tipo de conjuntos se busca el último accedido, la ocurrencia se especifica con un solo registro de ese conjunto (el propietario o uno de los miembors). si no se leyo ninguno no está definido
+=ACTUAL DE UNIDAD DE EJECUCION(Current of Run Unit): programa de acceso a la db que la computadora está ejecutando. Por cada unidad de ejecución, se busca al último registro accedido por el programa.
+-CADA VEZ QUE EL PROGRAMA EJECUTA UNA ORDEN DML: el sistema de gestion de db actualiza los indicadores de actualidad para los tipos de registros y de conjuntos afectados por la orden.
+-SENIAL DE EXITO/FRACASO: varios indicadores la devuelven despues de ejecutarse cada orden de DML. El programa puede revisarlos y en base a ellos emprender acciones apropiadas (continuar o transferir el control a una rutina de manejo de errores)
+
+SISTEMA DE BASES DE DATOS DE RED (Information Database Management System): modelo de sistema de red para sevidores
+ARQUITECTURA BASICA:  organiza sus db en series de archivos mapeados y preformateados en areas, las cuales se subdividen en paginas que corresponden a bloques fisicos en el disco: el DBA decide en donde se guarda cada información y detalla cómo se guardarán.
+ORGANIZACION LOGICA DE LOS DATOS: CODASYL, tiene registros y sets.

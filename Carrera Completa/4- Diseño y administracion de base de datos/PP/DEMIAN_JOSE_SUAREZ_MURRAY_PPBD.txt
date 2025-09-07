@@ -1,0 +1,193 @@
+Dadas las siguientes relaciones
+
+	facultad ( cod_facultad, nombre )
+	investigador ( cod_investigador, nombre, apellido, cod_facultad )
+	reserva ( cod_reserva, cod_investigador, inicio, fin )
+	equipo ( nro_serie, descripción, cod_facultad )
+	detalle_reserva ( cod_reserva, nro_serie )
+
+Responda las siguientes preguntas, utilizando las sentencias del leguaje SQL
+
+A)Obtener el nombre y apellido de aquellos investigadores que han realizado mas de una reserva.
+
+	SELECT I.nombre, I.Apellido 
+	FROM investigador as I, reserva as R
+	WHERE I.cod_investigador = R.cod_investigador
+	GROUP BY I.cod_investigador
+	HAVING COUNT(R.cod_investigador) > 1;
+
+
+B)Crear una vista para obtener de las reservas, nombre y apellido del investigador, nombre de su facultad, número de serie, descripción del equipo y nombre de la facultad a la que pertenecen los equipos reservados, fecha de inicio y fecha de fin de reserva.
+
+	CREATE VIEW V_INV_FAC_RES AS
+	SELECT r.inicio, r.fin, i.nombre, i.apellido, f.nombre AS facultad, e.descripcion, q.nombre as duenio
+	FROM reserva AS r
+	INNER JOIN investigador AS i ON r.cod_investigador = i.cod_investigador
+	INNER JOIN facultad AS f ON f.cod_facultad = i.cod_facultad
+	INNER JOIN detalle_reserva AS d ON r.cod_reserva = d.cod_reserva
+	INNER JOIN equipo AS e ON e.nro_serie = d.nro_serie
+	INNER JOIN facultad AS q ON q.cod_facultad = e.cod_facultad;
+
+
+C)Obtener los nombres de las facultades con investigadores que no han realizado ninguna reserva
+
+	SELECT f.nombre
+	FROM facultad AS f
+	WHERE f.cod_facultad NOT IN (
+		SELECT fa.cod_facultad FROM facultad AS fa
+		INNER JOIN investigador AS i ON i.cod_facultad = fa.cod_facultad
+		INNER JOIN reserva AS r ON r.cod_investigador = i.cod_investigador
+	);
+
+
+D)Escriba la sentencia que permita crear una tabla denominada ‘auditoria’ que contenga los siguientes atributos: id_reg, usuario_actual, fecha_actual, cod_investigador y nro_serie
+
+	CREATE TABLE auditoria (
+		Id_reg int,
+		usuario_actual varchar(50),
+		fecha_actual date,
+		cod_investigador int,
+		nro_serie int,
+		CONSTRAINT pk_id_reg PRIMARY KEY(id_reg),
+		CONSTRAINT fk_cod_inv FOREIGN KEY(cod_investigador) REFERENCES investigador(cod_investigador)
+		);
+
+
+
+
+2) Indique los componentes de un sistema de base de datos. Explicar brevemente cada uno de ellos.
+
+Los componentes de una base de datos son: Información, Equipos, Programas y Usuarios.
+	Información:
+    		Son los datos que vamos a almacenar en la base de datos. La misma tendra las siguientes caracteristicas:
+		Sera Integrada: unificacion de archivos archivos de datos, sin redundancias o con las minimas posibles.
+		Sera Compartida: las piezas individuales de informacion pueden ser usada por multiples usuarios.
+	Equipos:
+    		Es el hardware (usualmente servidores) sobre el cual va a correr el motor de la base de datos y donde se almacena la información.
+	Programas:
+    		Es el software a ser utilizado para lograr el acceso a la base de datos. Hay dos tipos:
+		De Aplicacion: permiten al usuario final interactuar con la Base de Datos.
+		De Administracion: maneja las solicitudes de acceso a la Base de Datos y procesa las consultas.
+	Usuarios:
+    		Los usuarios serían las personas o programas que utilicen nuestra Base de Datos. Se distinguen varios tipos:
+		Administrador, se encarga del control general. Sus funciones son
+			Definir el esquema conceptual e interno.
+			Vilcular a los usuarios.
+			Definir las reglas de seguridad e internas.
+			Realizar las copias de seguridad.
+			Supervisar el desempeño de la Base de Datos.
+			
+		Analista de Sistemas, determina los requerimientos de los usuarios finales.
+
+		Programador de Aplicaciones, codifica los programas que consumen la Base de Datos.
+
+		Usuarios Finales, consumen los programas que interactuan con la Base de Datos.
+
+
+3) Enumere y explique los 3 niveles en que se divide la arquitectura de un sistema de gestión de base de datos.
+
+	Nivel interno:
+    		Describe la estructura física de la base de datos mediante un esquema interno.
+
+	Nivel conceptual:
+   		Describe la estructura de toda la base de datos para una comunidad de usuarios (todos los de una empresa u organización).
+
+	Nivel externo:
+    		Describe varios esquemas externos o vistas de usuario. Cada esquema externo describe la parte de la base de datos que interesa a un grupo de usuarios determinados y ocultos a ese grupo el resto de la base de datos.
+
+
+4) Enumere y explique las características de una base de datos
+
+	Independencia de datos:
+    		La estructura de los datos almacenados es independiente del sistema que utilizara dicha DB.
+
+	Disminución de la redundancia:
+    		Nos permite almacenar los datos de manera única, reduciendo la posibilidad de error y ahorrando recursos.
+
+	Autodescriptiva:
+    		La base de datos contiene internamente una definición completa de si misma y de la información almacenada (Catalogo).
+
+	Multiplicidad de vistas:
+    		Es posible limitar el acceso y manera en que cada usuario vera nuestra base de datos.
+
+	Posibilidad de compartir información:
+   		La base de datos puede ser consultada por múltiples usuarios y/o programas.
+
+	Seguridad:
+    		Es posible restringir el acceso y la forma en que será vista nuestra BD.
+
+	Auditoria:
+    		Es posible acceder a registros eliminados y/o conocer que usuario realizo alguna modificacion.
+
+	Recupero:
+    		Es posible recuperar nuestra base de datos ante un eventual problema.
+
+	Relacionabilidad:
+   		Es posible establecer relaciones entre los datos que estamos almacenando.
+
+
+5)Dadas las siguientes consultas sobre la tabla BANCOS escribir los resultados obtenidos
+
+A) SELECT * FROM BANCOS WHERE 1 = 2
+
+	ID_BANCO | NOMBRE_BANCO | CALIFICACION
+	--------------------------------------
+	(nada)
+
+
+B) SELECT ID_BANCO FROM BANCOS 
+    WHERE NOMBRE_BANCO IN
+	(SELECT NOMBRE_BANCO FROM BANCOS 
+	WHERE NOMBRE_BANCO LIKE ‘Banco D%’);
+
+	ID_BANCO
+	--------
+	69
+
+
+C) SELECT CALIFICACION, COUNT(*) 
+FROM BANCOS
+GROUP BY CALIFICACION
+HAVING COUNT(*) > 3;
+
+	CALIFICACION | COUNT
+	--------------------
+	A+           | 4
+
+
+D) SELECT NOMBRE_BANCO AS BANCO
+FROM BANCOS 
+WHERE CALIFICACION = 'BBB-' OR CALIFICACION = 'A-';
+
+	BANCO
+	-----
+	Banco de la Provincia de Buenos Aires
+	Banco de Chubut
+	Banco Bisel S.A.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

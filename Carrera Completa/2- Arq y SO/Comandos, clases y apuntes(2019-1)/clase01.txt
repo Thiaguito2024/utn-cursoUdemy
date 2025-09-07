@@ -1,0 +1,23 @@
+    3  cd Clases/  #*cd* te lleva a la carpeta pedida o en su defecto al home
+
+    5  cat > clase01.txt #*cat >* es para crear un txt, ingresando el nombre en el lugar parado. se escribe lo que se quiera escribir y se sale con ctrl z
+    6  cat clase01.txt #tambien se utiliza cat para leer, se puede usar *cat<more<less*
+    7  history >> clase01.txt #*history*agrega el contenido de history al txt, se usa doble >> para agregar y no reescribir
+
+    5  ls #*ls*se usa para ver los elementos en el lugar
+
+    1  man cd #*man* explica los comandos 
+    2  tree #*tree*muestra como arbol los directorios y las ramas en el punto indicado
+    3  history > Clases/clase01/clase01.txt 
+    4  sudo apt install tree #*sudo* se utiliza para realizar operaciones como pseudo admin, pide una vez la contraseña
+
+    8  pwd #te muestra en donde se esta parado
+
+   13  cd /
+   14  # /$indica que estoy en la raiz, ~$ indica que estoy en mi home
+   15  tree # en el caso de que un comando siga y se lo quiera cortar, se utiliza ctrl z
+
+echo se puede utilizar para escribir una linea en un txt 
+    1  echo "echo se puede utilizar para escribir una linea en un txt "  >> clases/clase01/clase01.txt
+
+~# representa estar en l raiz del root, /# es estar en el home del root 

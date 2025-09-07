@@ -1,0 +1,7 @@
+Comandos para subir archivos a github
+git init -> crea el archivo .git en la carpeta donde esta parado el bash
+git add "nombre del archivo" 
+git commit -m "mensaje"
+git branch -M main -> no siempre hace fala hacer esto
+git remote add origin "url del repo" 
+git push -u origin main/master -> aca depende de la rama en la que esta el repo
