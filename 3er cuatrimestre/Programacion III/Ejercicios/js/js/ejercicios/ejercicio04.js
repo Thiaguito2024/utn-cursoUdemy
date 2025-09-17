@@ -1,0 +1,1 @@
+// Tabla de multiplicar de un número. Pedir por prompt.
